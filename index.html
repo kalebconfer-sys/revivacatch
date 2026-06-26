@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RevivaCatch — Stop Losing Patients to Missed Calls</title>
+<meta name="description" content="RevivaCatch automatically texts back every missed caller and books them in — so the patients your front desk can't catch don't walk to a competitor. Built by a Nurse Practitioner.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#0c5750; --ink:#102a26; --body:#44524e;
+    --bg:#ffffff; --cream:#f7f5f1; --blush:#fbeae6; --gold:#c9893f;
+    --line:#e7e2da; --ok:#0f766e;
+    --maxw:1080px;
+    --shadow:0 10px 40px -12px rgba(16,42,38,.18);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--body);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Fraunces','Georgia',serif;color:var(--ink);line-height:1.12;font-weight:600;letter-spacing:-.01em}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem)}
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem)}
+  h3{font-size:1.18rem}
+  p{font-size:1.05rem}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .btn{display:inline-block;background:var(--teal);color:#fff;font-weight:600;padding:15px 28px;border-radius:999px;font-size:1.02rem;transition:.2s;border:none;cursor:pointer;box-shadow:0 8px 22px -8px rgba(15,118,110,.6)}
+  .btn:hover{background:var(--teal-d);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--teal);box-shadow:none;border:1.5px solid var(--line)}
+  .btn-ghost:hover{background:var(--cream);transform:none}
+  .eyebrow{font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;color:var(--ink);display:flex;align-items:center;gap:9px}
+  .logo .dot{width:11px;height:11px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--blush)}
+  nav .links{display:flex;gap:28px;align-items:center}
+  nav .links a.nl{font-weight:500;font-size:.96rem;color:var(--body)}
+  nav .links a.nl:hover{color:var(--teal)}
+  @media(max-width:760px){nav .links .nl{display:none}}
+
+  /* hero */
+  .hero{background:linear-gradient(180deg,var(--cream),#fff);padding:72px 0 40px;position:relative;overflow:hidden}
+  .hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  @media(max-width:880px){.hero .grid{grid-template-columns:1fr;gap:32px}}
+  .hero h1{margin:18px 0 18px}
+  .hero h1 em{font-style:normal;color:var(--teal);position:relative}
+  .hero p.lead{font-size:1.22rem;color:var(--body);max-width:33ch}
+  .hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .trust{margin-top:24px;font-size:.92rem;color:var(--body);display:flex;align-items:center;gap:10px}
+  .trust .np{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-family:'Fraunces',serif}
+
+  /* hero card / phone mock */
+  .phone{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:22px;max-width:340px;margin:0 auto}
+  .phone .miss{background:var(--blush);color:#9b3a2a;border-radius:12px;padding:11px 14px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .bubble{background:var(--cream);border-radius:14px 14px 14px 4px;padding:12px 15px;font-size:.92rem;color:var(--ink);margin-bottom:10px;max-width:88%}
+  .bubble.them{background:var(--teal);color:#fff;border-radius:14px 14px 4px 14px;margin-left:auto}
+  .bubble small{display:block;color:#8a948f;font-size:.72rem;margin-top:3px}
+  .bubble.them small{color:rgba(255,255,255,.7)}
+  .tstamp{text-align:center;font-size:.74rem;color:#9aa39f;margin:6px 0 12px}
+
+  /* sections */
+  section{padding:64px 0}
+  .center{text-align:center;max-width:640px;margin:0 auto 44px}
+  .center p{color:var(--body);margin-top:14px;font-size:1.1rem}
+
+  .stat-band{background:var(--ink);color:#fff;border-radius:var(--radius);padding:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+  @media(max-width:680px){.stat-band{grid-template-columns:1fr;gap:28px}}
+  .stat-band .n{font-family:'Fraunces',serif;font-size:2.5rem;color:#fff;font-weight:600}
+  .stat-band .l{color:#a9c4bf;font-size:.95rem;margin-top:4px}
+
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  @media(max-width:680px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.2s}
+  .card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--blush);display:grid;place-items:center;font-size:1.4rem;margin-bottom:14px}
+  .card h3{margin-bottom:7px}
+  .card p{font-size:.98rem}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+  @media(max-width:680px){.steps{grid-template-columns:1fr}}
+  .step{position:relative;padding-top:8px}
+  .step .num{counter-increment:s;font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#fff;background:var(--teal);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;margin-bottom:14px}
+  .step .num::before{content:counter(s)}
+
+  /* calculator */
+  .calc-sec{background:var(--cream)}
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+  @media(max-width:760px){.calc{grid-template-columns:1fr}}
+  .calc .inputs{padding:34px}
+  .calc .result{padding:34px;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center}
+  .field{margin-bottom:22px}
+  .field label{display:block;font-weight:600;color:var(--ink);font-size:.95rem;margin-bottom:9px;display:flex;justify-content:space-between}
+  .field label .val{color:var(--teal);font-weight:700}
+  .field input[type=range]{width:100%;accent-color:var(--teal);height:5px}
+  .field .row{display:flex;align-items:center;gap:10px}
+  .field .row span{color:var(--body);font-weight:600}
+  .field input[type=number]{width:110px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:1rem;font-family:inherit}
+  .result .rlabel{color:#a9c4bf;font-size:.92rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .result .big{font-family:'Fraunces',serif;font-size:clamp(2.6rem,7vw,3.6rem);font-weight:600;color:#fff;margin:6px 0;line-height:1}
+  .result .sub{color:#cfe0dd;font-size:1rem}
+  .result .miss-n{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:.96rem;color:#cfe0dd}
+  .result .miss-n b{color:#fff}
+  .result .note{font-size:.78rem;color:#8aa49f;margin-top:16px}
+
+  /* guarantee */
+  .guarantee{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:#fff;border-radius:var(--radius);padding:46px;text-align:center}
+  .guarantee h2{color:#fff;max-width:18ch;margin:0 auto 14px}
+  .guarantee p{color:#d7eae6;max-width:46ch;margin:0 auto 26px}
+  .guarantee .btn{background:#fff;color:var(--teal)}
+  .guarantee .btn:hover{background:var(--cream)}
+  .seal{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:18px}
+
+  /* footer */
+  footer{background:var(--ink);color:#b9ccc8;padding:48px 0 30px;font-size:.92rem}
+  footer .grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:flex-start}
+  footer .logo{color:#fff}
+  footer a{color:#b9ccc8}footer a:hover{color:#fff}
+  footer .fl{display:flex;gap:22px;flex-wrap:wrap}
+  footer .fine{margin-top:28px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);color:#7e918d;font-size:.82rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#"><span class="dot"></span>RevivaCatch</a>
+    <div class="links">
+      <a class="nl" href="#how">How it works</a>
+      <a class="nl" href="#calc">Calculator</a>
+      <a class="nl" href="#guarantee">Guarantee</a>
+      <a class="btn" href="#book">Book a Free Audit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">For med spas &amp; aesthetic clinics</span>
+      <h1>Stop losing patients to <em>missed calls.</em></h1>
+      <p class="lead">RevivaCatch automatically texts back every missed caller and books them in — so the patients your front desk can't catch don't walk to a competitor.</p>
+      <div class="cta-row">
+        <a class="btn" href="#book">Book a Free 15-Minute Revenue Audit</a>
+        <a class="btn btn-ghost" href="#calc">See what you're losing →</a>
+      </div>
+      <div class="trust"><span class="np">NP</span> Built and backed by a Nurse Practitioner who knows your clinic.</div>
+    </div>
+    <div>
+      <div class="phone" aria-hidden="true">
+        <div class="miss">📞 Missed call — 2:14 PM</div>
+        <div class="tstamp">RevivaCatch replies in 20 seconds</div>
+        <div class="bubble them">Hi! This is Glow Aesthetics — sorry we missed you. Were you looking to book? Tap here and we'll get you in 💛<small>2:14 PM</small></div>
+        <div class="bubble">Yes! Looking for Botox next week<small>2:15 PM</small></div>
+        <div class="bubble them">Perfect — grab a time that works: <u>book.glowaesthetics.com</u><small>2:15 PM</small></div>
+        <div class="bubble">Booked for Tuesday 🎉<small>2:16 PM</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="stat-band">
+      <div><div class="n">~30%</div><div class="l">of calls go unanswered — usually when staff are with a patient</div></div>
+      <div><div class="n">20 sec</div><div class="l">until a missed caller gets a text back from your clinic</div></div>
+      <div><div class="n">$0</div><div class="l">extra work for your front desk — it runs itself</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">The fix</span>
+      <h2>One system that catches every patient you'd miss</h2>
+      <p>Not a bloated CRM. One thing, done flawlessly — recovering the revenue slipping through your phone.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="ic">📞</div><h3>Missed-Call Text-Back</h3><p>The instant a call goes unanswered, the caller gets a friendly text from your clinic with a booking link — within 20 seconds.</p></div>
+      <div class="card"><div class="ic">📅</div><h3>Automatic Booking</h3><p>Patients pick a time themselves and book directly into your calendar. Your front desk never lifts a finger.</p></div>
+      <div class="card"><div class="ic">⭐</div><h3>Review Engine</h3><p>Happy patients are automatically invited to leave a Google review — quietly building your reputation on autopilot.</p></div>
+      <div class="card"><div class="ic">📊</div><h3>Recovered-Revenue Dashboard</h3><p>See exactly how many patients — and how much revenue — you've won back each month. The number that pays for itself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:var(--cream)">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">How it works</span><h2>Live in days. Then it just runs.</h2></div>
+    <div class="steps">
+      <div class="step"><div class="num"></div><h3>We build it for you</h3><p>Your number, your text messages, your booking flow — set up, tested, and live in days. You don't touch the tech.</p></div>
+      <div class="step"><div class="num"></div><h3>A call goes unanswered</h3><p>Front desk busy with a patient? The caller gets a text from your clinic in 20 seconds, before they call a competitor.</p></div>
+      <div class="step"><div class="num"></div><h3>They book themselves in</h3><p>The patient taps the link and picks a time. You watch the recovered revenue add up on your dashboard.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="calc" class="calc-sec">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Free calculator</span><h2>How much are you leaving on the table?</h2><p>Most clinics are stunned by the number. Move the sliders to see yours.</p></div>
+    <div class="calc">
+      <div class="inputs">
+        <div class="field">
+          <label>Calls per day <span class="val" id="vCalls">20</span></label>
+          <input type="range" id="calls" min="5" max="80" value="20">
+        </div>
+        <div class="field">
+          <label>% of calls missed <span class="val" id="vMiss">30%</span></label>
+          <input type="range" id="miss" min="5" max="60" value="30">
+        </div>
+        <div class="field">
+          <label>Average treatment value</label>
+          <div class="row"><span>$</span><input type="number" id="value" value="400" min="50" step="50"></div>
+        </div>
+        <p style="font-size:.82rem;color:var(--body);margin-top:4px">Assumes ~22 business days/month and a conservative ~10% of missed calls being recoverable bookings.</p>
+      </div>
+      <div class="result">
+        <div class="rlabel">Revenue slipping away every month</div>
+        <div class="big" id="lost">$5,280</div>
+        <div class="sub">That's roughly <b id="bookings">13</b> patients a month walking to a competitor.</div>
+        <div class="miss-n">You're missing about <b id="missed">132</b> calls a month. RevivaCatch catches them.</div>
+        <div class="note">Estimate for illustration. Your real number comes from your live dashboard.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:30px"><a class="btn" href="#book">Get my exact number — book a free audit</a></div>
+  </div>
+</section>
+
+<section id="guarantee">
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal">★ The RevivaCatch Guarantee</div>
+      <h2>Recovered patients in 14 days, or you don't pay.</h2>
+      <p>We're so confident the system pays for itself that if you don't see recovered patients in your first 14 days, you don't pay the next month. Simple as that.</p>
+      <a class="btn" href="#book">Claim a Founding Client Spot</a>
+    </div>
+  </div>
+</section>
+
+<section id="book" style="padding-top:24px">
+  <div class="wrap">
+    <div class="center">
+      <span class="eyebrow">Let's talk</span>
+      <h2>See what you're leaving on the table</h2>
+      <p>A free, no-pressure 15-minute revenue audit. We'll show you your real missed-call number and exactly how RevivaCatch recovers it. Taking a few founding clients this month.</p>
+      <div style="margin-top:26px"><a class="btn" href="mailto:kaleb@revivacatch.com?subject=RevivaCatch%20Revenue%20Audit">Book My Free Revenue Audit</a></div>
+      <p style="font-size:.9rem;margin-top:18px">Or email <a href="mailto:kaleb@revivacatch.com" style="color:var(--teal);font-weight:600">kaleb@revivacatch.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="logo"><span class="dot" style="box-shadow:0 0 0 4px rgba(255,255,255,.08)"></span>RevivaCatch</div>
+        <p style="margin-top:10px;max-width:30ch">Revive the revenue slipping through your phone. Founded by a Nurse Practitioner.</p>
+      </div>
+      <div class="fl">
+        <a href="#how">How it works</a>
+        <a href="#calc">Calculator</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="mailto:kaleb@revivacatch.com">Contact</a>
+      </div>
+    </div>
+    <div class="fine">© 2026 RevivaCatch · [Your business address] · kaleb@revivacatch.com</div>
+  </div>
+</footer>
+
+<script>
+  var calls=document.getElementById('calls'),miss=document.getElementById('miss'),value=document.getElementById('value');
+  var BUSINESS_DAYS=22, RECOVER_RATE=0.10;
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function update(){
+    var c=+calls.value, m=+miss.value/100, v=+value.value||0;
+    var missedMonth=Math.round(c*m*BUSINESS_DAYS);
+    var bookings=Math.round(missedMonth*RECOVER_RATE);
+    var lost=bookings*v;
+    document.getElementById('vCalls').textContent=c;
+    document.getElementById('vMiss').textContent=miss.value+'%';
+    document.getElementById('missed').textContent=missedMonth;
+    document.getElementById('bookings').textContent=bookings;
+    document.getElementById('lost').textContent=money(lost);
+  }
+  [calls,miss,value].forEach(function(el){el.addEventListener('input',update);});
+  update();
+</script>
+</body>
+</html>
