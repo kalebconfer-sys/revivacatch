@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Delivery Carriers</title>
+<meta name="robots" content="noindex">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:#fff}
+  body{
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:#0d0d0d;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    user-select:none;-webkit-user-select:none;
+  }
+
+  .grid{
+    position:fixed;inset:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:2.2vmin;
+    padding:max(2.2vmin,env(safe-area-inset-top)) max(2.2vmin,env(safe-area-inset-right))
+            max(2.2vmin,env(safe-area-inset-bottom)) max(2.2vmin,env(safe-area-inset-left));
+  }
+
+  .tile{
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:2.4vmin;
+    border:2px solid #e7e2da;
+    border-radius:2.4vmin;
+    padding:3vmin;
+    min-width:0;min-height:0;
+  }
+  /* Every mark shares a 260x120 viewBox, so the tiles stay optically matched. */
+  .tile svg{
+    width:100%;height:auto;
+    max-height:70%;
+  }
+  .name{
+    font-size:clamp(13px,2.4vmin,26px);
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#6b736f;
+  }
+
+  .flip{
+    position:fixed;
+    right:max(14px,env(safe-area-inset-right));
+    bottom:max(14px,env(safe-area-inset-bottom));
+    width:52px;height:52px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    background:#f2f0ec;color:#8b8b86;
+    border:1px solid #e4e1da;
+    font-size:22px;line-height:1;
+    text-decoration:none;
+    opacity:.5;
+    transition:opacity .2s;
+  }
+  .flip:hover,.flip:focus-visible{opacity:1}
+  .flip:focus-visible{outline:3px solid #0f766e;outline-offset:3px}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="grid">
+
+  <!-- UPS -->
+  <div class="tile">
+    <svg viewBox="0 0 260 120" role="img" aria-label="UPS">
+      <path d="M130 4c-26 0-56 8-56 8v52c0 27 14 41 56 62 42-21 56-35 56-62V12s-30-8-56-8z" fill="#3A2418"/>
+      <path d="M99 40c20-8 42-8 62 0-20-4-42-4-62 0z" fill="#FFB500"/>
+      <g data-fit="88,60,84,34">
+        <text x="130" y="92" text-anchor="middle" fill="#FFB500"
+              font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+              font-size="40" font-weight="800" letter-spacing="1">UPS</text>
+      </g>
+    </svg>
+    <div class="name">UPS</div>
+  </div>
+
+  <!-- FedEx -->
+  <div class="tile">
+    <svg viewBox="0 0 260 120" role="img" aria-label="FedEx">
+      <g data-fit="10,26,240,68">
+        <text x="130" y="76" text-anchor="middle"
+              font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+              font-size="58" font-weight="800" letter-spacing="-1.5">
+          <tspan fill="#4D148C">Fed</tspan><tspan fill="#FF6600">Ex</tspan>
+        </text>
+      </g>
+    </svg>
+    <div class="name">FedEx</div>
+  </div>
+
+  <!-- Amazon -->
+  <div class="tile">
+    <svg viewBox="0 0 260 120" role="img" aria-label="Amazon">
+      <g data-fit="12,16,236,88" id="amz">
+        <text id="amz-word" x="130" y="62" text-anchor="middle" fill="#232F3E"
+              font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+              font-size="54" font-weight="700" letter-spacing="-1.5">amazon</text>
+        <path data-gen d="M56 74q74 28 136 4" stroke="#FF9900" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path data-gen d="M176 68l20 8-15 14z" fill="#FF9900"/>
+      </g>
+    </svg>
+    <div class="name">Amazon</div>
+  </div>
+
+  <!-- USPS -->
+  <div class="tile">
+    <svg viewBox="0 0 260 120" role="img" aria-label="USPS — United States Postal Service">
+      <g data-fit="12,20,236,80">
+        <path d="M14 44l58-16 5 12-58 16z" fill="#DA291C"/>
+        <path d="M18 64l60-16 5 12-60 16z" fill="#DA291C"/>
+        <path d="M22 84l62-16 5 12-62 16z" fill="#004B87"/>
+        <text x="172" y="78" text-anchor="middle" fill="#004B87"
+              font-family="system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+              font-size="44" font-weight="800" letter-spacing="1">USPS</text>
+      </g>
+    </svg>
+    <div class="name">USPS</div>
+  </div>
+
+</div>
+
+<a class="flip" href="packages.html" aria-label="Back to the Place Packages Here sign">&lsaquo;</a>
+
+<script>
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  // Draw the Amazon smile from the wordmark's measured box so the two always line up,
+  // whatever font the tablet substitutes.
+  function buildSmile() {
+    var g = document.getElementById('amz');
+    var word = document.getElementById('amz-word');
+    if (!g || !word) return;
+
+    var bb;
+    try { bb = word.getBBox(); } catch (e) { return; }
+    if (!bb.width) return;
+
+    g.querySelectorAll('[data-gen]').forEach(function (n) { n.remove(); });
+
+    var x0 = bb.x + bb.width * 0.03, x2 = bb.x + bb.width * 0.95;
+    var y0 = bb.y + bb.height + 8, y2 = bb.y + bb.height + 10;
+    var cx = bb.x + bb.width * 0.5, cy = bb.y + bb.height + 38;
+    var sw = Math.max(4, bb.height * 0.15);
+
+    var smile = document.createElementNS(SVGNS, 'path');
+    smile.setAttribute('d', 'M' + x0 + ' ' + y0 + 'Q' + cx + ' ' + cy + ' ' + x2 + ' ' + y2);
+    smile.setAttribute('stroke', '#FF9900');
+    smile.setAttribute('stroke-width', sw);
+    smile.setAttribute('stroke-linecap', 'round');
+    smile.setAttribute('fill', 'none');
+    smile.setAttribute('data-gen', '');
+    g.appendChild(smile);
+
+    // Arrowhead aimed along the curve's exit tangent.
+    var a = Math.atan2(y2 - cy, x2 - cx) * 180 / Math.PI;
+    var head = document.createElementNS(SVGNS, 'path');
+    head.setAttribute('d', 'M' + (-sw * 0.2) + ' ' + (-sw * 1.5) + 'L' + (sw * 2.1) + ' 0L' + (-sw * 0.2) + ' ' + (sw * 1.5) + 'Z');
+    head.setAttribute('transform', 'translate(' + x2 + ',' + y2 + ') rotate(' + a + ')');
+    head.setAttribute('fill', '#FF9900');
+    head.setAttribute('data-gen', '');
+    g.appendChild(head);
+  }
+
+  // The tablet's system font won't have the same metrics as the one these marks were
+  // drawn against, so fit each group to its slot by measurement instead of trusting
+  // hardcoded font sizes. Keeps the wordmarks inside the viewBox on any device.
+  function fitMarks() {
+    document.querySelectorAll('[data-fit]').forEach(function (g) {
+      var t = g.getAttribute('data-fit').split(',').map(Number);
+      var rx = t[0], ry = t[1], rw = t[2], rh = t[3];
+      g.removeAttribute('transform');
+      var bb;
+      try { bb = g.getBBox(); } catch (e) { return; }
+      if (!bb.width || !bb.height) return;
+      var s = Math.min(rw / bb.width, rh / bb.height);
+      var tx = rx + (rw - bb.width * s) / 2 - bb.x * s;
+      var ty = ry + (rh - bb.height * s) / 2 - bb.y * s;
+      g.setAttribute('transform', 'translate(' + tx + ',' + ty + ') scale(' + s + ')');
+    });
+  }
+
+  function render() { buildSmile(); fitMarks(); }
+
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+  addEventListener('resize', render);
+  addEventListener('orientationchange', function () { setTimeout(render, 150); });
+
+  addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') location.href = 'packages.html';
+  });
+
+  function keepAwake() {
+    if (!navigator.wakeLock) return;
+    navigator.wakeLock.request('screen').catch(function () {});
+  }
+  keepAwake();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') keepAwake();
+  });
+})();
+</script>
+
+</body>
+</html>

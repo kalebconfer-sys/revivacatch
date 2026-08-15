@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Place Packages Here</title>
+<meta name="robots" content="noindex">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:#fff}
+  body{
+    font-family:system-ui,-apple-system,'Segoe UI Black','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    color:#0d0d0d;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+    user-select:none;-webkit-user-select:none;
+  }
+
+  .stage{
+    position:fixed;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    padding:max(3vmin,env(safe-area-inset-top)) max(4vmin,env(safe-area-inset-right))
+            max(3vmin,env(safe-area-inset-bottom)) max(4vmin,env(safe-area-inset-left));
+  }
+
+  /* Sized by JS to fill the screen exactly. */
+  .fit{
+    font-size:100px;
+    text-align:center;
+    line-height:.92;
+    letter-spacing:-.02em;
+    font-weight:900;
+    white-space:nowrap;
+  }
+  .line{text-transform:uppercase}
+  .arrow{
+    display:block;
+    margin:.16em auto 0;
+    width:.85em;height:.42em;
+    color:#0f766e;
+  }
+  .arrow path{fill:currentColor}
+
+  /* Discreet corner control — small enough that a bumped tablet won't flip pages. */
+  .flip{
+    position:fixed;
+    right:max(14px,env(safe-area-inset-right));
+    bottom:max(14px,env(safe-area-inset-bottom));
+    width:52px;height:52px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    background:#f2f0ec;color:#8b8b86;
+    border:1px solid #e4e1da;
+    font-size:22px;line-height:1;
+    text-decoration:none;
+    opacity:.5;
+    transition:opacity .2s;
+  }
+  .flip:hover,.flip:focus-visible{opacity:1}
+  .flip:focus-visible{outline:3px solid #0f766e;outline-offset:3px}
+
+  @media (prefers-color-scheme:dark){
+    html,body{background:#fff}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="fit" id="fit">
+    <div class="line">Place</div>
+    <div class="line">Packages</div>
+    <div class="line">Here</div>
+    <svg class="arrow" viewBox="0 0 100 50" aria-hidden="true">
+      <path d="M36 0h28v20h22L50 50 14 20h22z"/>
+    </svg>
+  </div>
+</div>
+
+<a class="flip" href="carriers.html" aria-label="Show delivery carriers">&rsaquo;</a>
+
+<script>
+(function () {
+  var fit = document.getElementById('fit');
+  var stage = document.querySelector('.stage');
+  var BASE = 100;      // measuring font-size
+  var BASE_LH = 0.92;  // matches .fit line-height in CSS
+  var MAX_LH = 1.45;   // don't let the lines drift so far apart they stop reading as one sign
+
+  function resize() {
+    fit.style.lineHeight = BASE_LH;
+    fit.style.fontSize = BASE + 'px';
+
+    var cs = getComputedStyle(stage);
+    var availW = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var availH = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+
+    var r = fit.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+
+    fit.style.fontSize = (BASE * Math.min(availW / r.width, availH / r.height)) + 'px';
+
+    // On a tall (portrait) screen the type is width-limited, which leaves dead space
+    // above and below. Spend it on leading so the sign still fills the display.
+    var lh = BASE_LH;
+    for (var i = 0; i < 3; i++) {
+      var h = fit.getBoundingClientRect().height;
+      if (Math.abs(h - availH) < 1) break;
+      lh = Math.min(lh * (availH / h), MAX_LH);
+      fit.style.lineHeight = lh;
+      if (lh === MAX_LH) break;
+    }
+  }
+
+  resize();
+  addEventListener('resize', resize);
+  addEventListener('orientationchange', function () { setTimeout(resize, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+
+  // Arrow keys flip between the two signs, handy with a keyboard or remote.
+  addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') location.href = 'carriers.html';
+  });
+
+  // Keep the tablet screen awake while the sign is up.
+  function keepAwake() {
+    if (!navigator.wakeLock) return;
+    navigator.wakeLock.request('screen').catch(function () {});
+  }
+  keepAwake();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') keepAwake();
+  });
+})();
+</script>
+
+</body>
+</html>
