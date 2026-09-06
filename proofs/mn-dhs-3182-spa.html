@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DHS-3182-SPA conformance report</title><meta name="description" content="PDF/UA-1 conformance report for Minnesota Department of Human Services DHS-3182-SPA: before and after, every change listed.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal-d:#0c5750;--ink:#102a26;--body:#44524e;--bg:#fff;--cream:#f7f5f1;--blush:#fbeae6;--gold:#c9893f;--line:#e7e2da;--red:#9b3a2a;--maxw:960px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--body);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Prata','Georgia',serif;color:var(--ink);font-weight:400;line-height:1.18}
+h1{font-size:clamp(1.6rem,3.6vw,2.3rem);text-wrap:balance}
+h2{font-size:1.45rem;margin:0 0 14px}
+h3{font-size:1.08rem;margin:0 0 4px}
+p{text-wrap:pretty}
+a{color:var(--teal)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+header.top{border-bottom:1px solid var(--line);background:rgba(255,255,255,.9)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;gap:16px;flex-wrap:wrap}
+.logo{font-family:'Prata',serif;font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--blush)}
+.sub{font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.hero{padding:44px 0 28px;background:linear-gradient(180deg,var(--cream),#fff)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 24px;margin-top:18px;font-size:.93rem}
+.meta div b{display:block;color:var(--ink);font-weight:600;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.meta div{overflow-wrap:anywhere}
+.band{background:var(--ink);color:#fff;border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:26px 0}
+@media(max-width:680px){.band{grid-template-columns:1fr}}
+.band .l{color:#a9c4bf;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.band .n{font-family:'Prata',serif;font-size:2rem;color:#fff;line-height:1.1;margin:4px 0 2px}
+.band .s{color:#cfe0dd;font-size:.92rem}
+.band .fail{color:#f2b8a6}.band .pass{color:#9fe3c1}
+section{padding:30px 0;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--cream)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.finding{display:grid;grid-template-columns:minmax(180px,.9fr) 2fr;gap:8px 22px;padding:14px 0;border-bottom:1px solid var(--line)}
+.finding:last-child{border-bottom:0}
+@media(max-width:680px){.finding{grid-template-columns:1fr}}
+.finding h3{color:var(--ink)}
+ul.plain{padding-left:20px}
+ul.plain li{margin:6px 0}
+.note{background:var(--cream);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0;font-size:.95rem}
+.dl{display:inline-block;background:var(--teal);color:#fff;font-weight:600;padding:11px 20px;border-radius:999px;text-decoration:none;margin:6px 8px 0 0}
+.dl.ghost{background:transparent;color:var(--teal);border:1.5px solid var(--line)}
+footer{background:var(--ink);color:#b9ccc8;padding:34px 0 26px;font-size:.9rem;margin-top:30px}
+footer a{color:#fff}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(--cream);padding:1px 5px;border-radius:4px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.doc{border:1px solid var(--line);border-radius:16px;padding:20px;background:#fff}
+.doc .k{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.doc h3{margin:6px 0 8px;font-size:1.06rem}
+.doc .row{display:flex;gap:14px;font-size:.9rem;margin:8px 0 12px;flex-wrap:wrap}
+.doc .row span b{color:var(--ink)}
+</style></head><body>
+<header class="top"><div class="wrap"><a class="logo" href="/"><span class="dot"></span>RevivaCatch</a><span class="sub">Document accessibility · PDF/UA proofs</span></div></header>
+
+<div class="hero"><div class="wrap"><span class="sub">Conformance report · DHS-3182-SPA</span>
+<h1 style="margin-top:8px">Programas de Atención Médica de Minnesota</h1>
+<div class="meta">
+<div><b>Issuer</b>Minnesota Department of Human Services</div><div><b>Document</b>Spanish edition of the Minnesota Health Care Programs information sheet (InDesign export, tagged)</div>
+<div><b>Pages</b>8</div><div><b>Source</b><a href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3182-SPA">https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3182-SPA</a><br>retrieved 2026-09-05</div>
+</div>
+<div class="band">
+<div><div class="l">Published file</div><div class="n fail">FAIL</div><div class="s">5 rules · 191 failed checks</div></div>
+<div><div class="l">Remediated file</div><div class="n pass">PASS</div><div class="s">0 failed rules · 32,232 checks passed</div></div>
+<div><div class="l">Rendering</div><div class="n">8/8</div><div class="s">pages pixel-identical at 100 dpi</div></div>
+</div>
+<a class="dl" href="mn-dhs-3182-spa-remediated.pdf">Download the remediated PDF</a>
+<a class="dl ghost" href="https://edocs.dhs.state.mn.us/lfserver/Public/DHS-3182-SPA">Published original (issuer's site)</a>
+</div></div>
+
+<section><div class="wrap"><h2>What the validator failed, and what was done</h2>
+<div class="scroll"><table><thead><tr><th>Rule</th><th>veraPDF description</th><th class=num>Before</th><th class=num>After</th><th>Action</th></tr></thead><tbody><tr><td><code>5-1</code></td><td>The PDF/UA version and conformance level of a file shall be specified using the PDF/UA Identification extension schema</td><td class=num>1</td><td class=num>0</td><td>Wrote the pdfuaid:part=1 identifier into the XMP packet - only after every other rule passed, so the claim is true.</td></tr><tr><td><code>7.1-3</code></td><td>Content shall be marked as Artifact or tagged as real content</td><td class=num>185</td><td class=num>0</td><td>Untagged content was inspected operator by operator: every item was a path-painting operator (table rules, borders, fills), none was text. Each was wrapped as an Artifact so assistive technology skips it. No text was artifacted.</td></tr><tr><td><code>7.1-10</code></td><td>The document catalog dictionary shall include a ViewerPreferences dictionary containing a DisplayDocTitle key, whose value shall be true</td><td class=num>1</td><td class=num>0</td><td>Set ViewerPreferences/DisplayDocTitle so the title bar shows the document title, not the file name.</td></tr><tr><td><code>7.5-1</code></td><td>If the table&#x27;s structure is not determinable via Headers and IDs, then structure elements of type TH shall have a Scope attribute</td><td class=num>3</td><td class=num>0</td><td>Header cells received a Scope attribute: Column for cells in a table&#x27;s first row, Row for header cells that lead a later row.</td></tr><tr><td><code>7.21.4.2-2</code></td><td>If the FontDescriptor dictionary of an embedded CID font contains a CIDSet stream, then it shall identify all CIDs which are present in the font program, regardless of whether a CID in the font is referenced or used by the PDF or not</td><td class=num>1</td><td class=num>0</td><td>The embedded font&#x27;s optional CIDSet stream under-declared the glyphs actually used. The stream was removed; it is optional in PDF and carries no rendering information, so nothing changes visually.</td></tr></tbody></table></div>
+</div></section>
+
+<section><div class="wrap"><h2>Language: the failure the validator cannot see</h2>
+<p>A validator checks that a language is <em>declared</em>. It cannot tell whether the declared language matches the text. This document declared: <b>en-US</b> on the document and en-US on 1 element. It now declares <b>es</b> on the document, and the language was set on every element from its own text:
+<b>37</b> elements marked Spanish, <b>37</b> marked English, <b>1</b> stale declarations removed so the element inherits correctly.</p>
+<div class="scroll" style="margin-top:14px"><table><thead><tr><th class=num>Page</th><th>Element</th><th>Before</th><th>After</th><th>Text (start)</th></tr></thead><tbody><tr><td class=num>1</td><td><code>H1</code></td><td>inherited</td><td><b>es</b></td><td>Programas de Atención Médica de Minnesota</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>Los Programas de Atención Médica de Minnesota pueden brindarle a usted y a su familia cobertura para la mayorí</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>Medical Assistance (MA) is Minnesota’s Medicaid Medical Assistance (MA), también llamado Asistencia Médica, es</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>Puede tener otro seguro médico y aun así calificar para MA. MA también podría ayudarle a pagar el costo de ese</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>MA-EPD es un programa de atención médica que ayuda a las personas con discapacidades certificadas que trabajan</td></tr><tr><td class=num>1</td><td><code>H2</code></td><td>inherited</td><td><b>es</b></td><td>Programas de Ahorros de Medicare</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>Los Programas de Ahorros de Medicare pueden ayudar a pagar costos de Medicare, como la cuota mensual, los dedu</td></tr><tr><td class=num>1</td><td><code>Text</code></td><td>inherited</td><td><b>es</b></td><td>MinnesotaCare es un programa de atención médica de Minnesota. Este programa ofrece cobertura médica de bajo co</td></tr></tbody></table></div>
+<p style="margin-top:12px;font-size:.92rem">Title: <code>DHS-3182-ENG</code> → <code>Programas de Atención Médica de Minnesota (DHS-3182-SPA)</code>, and the viewer is set to display it.</p>
+</div></section>
+
+<section><div class="wrap"><h2>Findings</h2><div class="finding"><h3>The whole document declared one language: English.</h3><p>The file carried a single /Lang of en-US on the document, and every element inherited it. A screen reader therefore pronounced the Spanish text with English rules. The document language is now Spanish and 37 elements that are genuinely English are marked en-US individually, so both languages are voiced correctly.</p></div><div class="finding"><h3>Pages 3 and 4 of the Spanish edition are in English.</h3><p>The translation stops partway through page 2. The asset-limit, MNsure and &#x27;How can I apply?&#x27; sections that follow are the English text. This is a content defect in the published file, not a tagging defect; the report marks those passages en-US so they are at least read intelligibly, and the issuer should be told.</p></div><div class="finding"><h3>The Spanish file carried the English title.</h3><p>Document title was &#x27;DHS-3182-ENG&#x27;. It is now the Spanish title with the form number, and the viewer is told to display it.</p></div><div class="finding"><h3>Pages 5 to 8 (the multilingual language-assistance notice) have no text layer.</h3><p>Those pages are drawn as vector outlines. Page 5 is exposed as a single Figure whose alternate text is the English notice only; pages 6 to 8 are marked as artifacts, so a screen reader hears nothing on them. This pass does not repair that - it needs the source text for each language, either a re-export from InDesign or the notice typed into alternate text per language. Quoted separately.</p></div></div></section>
+
+<section><div class="wrap"><h2>Rendering</h2><p>All 8 pages render pixel-identical to the published file at 100 dpi. Nothing visible changed.</p></div></section>
+
+<section><div class="wrap"><h2>Not covered by this pass</h2><ul class="plain"><li>Reading order was not re-sequenced. The existing tag order was kept.</li><li>Alternate text was not written or rewritten. Existing alternate text was kept as published.</li><li>Table header scope was assigned by position (first row = column headers, leading cell = row header). A human check against the visual table is recommended for complex tables.</li><li>No content was translated, corrected or rewritten. Where the published file contains untranslated or outlined text, this report says so; fixing it needs the issuer&#x27;s source.</li><li>Form-field tooltips (Designer forms) were kept as published; their language and wording were not reviewed.</li></ul>
+<div class="note">A PASS from veraPDF means the file has no machine-detectable defect against ISO 14289-1. It does not by itself mean the document is usable; the findings above are the part a validator cannot judge, and they are why a human pass exists.</div>
+</div></section>
+<footer><div class="wrap"><p><b style="color:#fff">RevivaCatch LLC</b> · 6119 Spires Drive, Erie, PA 16509 · <a href="mailto:kaleb@revivacatch.com">kaleb@revivacatch.com</a></p>
+<p style="margin-top:8px;font-size:.82rem;color:#8ba39e">Validation: veraPDF 1.30.2, profile PDF/UA-1 (ISO 14289-1). Rendering comparison: 100 dpi raster of every page, source against remediated. Every change is deterministic and reproducible from the source file. Source documents remain the property of their issuing agencies; they are public records reproduced here for a technical demonstration. Report generated 2026-09-05.</p></div></footer></body></html>

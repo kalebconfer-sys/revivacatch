@@ -1,0 +1,102 @@
+{
+ "mn-dhs-3182-spa": {
+  "before": {
+   "failedRules": 5,
+   "failedChecks": 191,
+   "fails": {
+    "7.21.4.2-2": 1,
+    "7.5-1": 3,
+    "5-1": 1,
+    "7.1-3": 185,
+    "7.1-10": 1
+   }
+  },
+  "after": {
+   "compliant": true,
+   "failedRules": 0,
+   "failedChecks": 0,
+   "passedChecks": 32232
+  },
+  "render": {
+   "identical": 8,
+   "pages": 8
+  },
+  "vera": "1.30.2"
+ },
+ "wa-lni-f700-074-909": {
+  "before": {
+   "failedRules": 5,
+   "failedChecks": 68,
+   "fails": {
+    "7.21.4.2-2": 1,
+    "7.18.1-2": 25,
+    "7.18.5-2": 25,
+    "7.1-3": 16,
+    "5-1": 1
+   }
+  },
+  "after": {
+   "compliant": true,
+   "failedRules": 0,
+   "failedChecks": 0,
+   "passedChecks": 38272
+  },
+  "render": {
+   "identical": 2,
+   "pages": 2
+  },
+  "vera": "1.30.2"
+ },
+ "mn-dhs-3418-spa": {
+  "before": {
+   "failedRules": 7,
+   "failedChecks": 597,
+   "fails": {
+    "7.4.2-1": 1,
+    "7.18.5-2": 2,
+    "7.18.1-2": 2,
+    "7.10-1": 1,
+    "7.1-3": 582,
+    "7.10-2": 1,
+    "7.2-9": 8
+   }
+  },
+  "after": {
+   "compliant": true,
+   "failedRules": 0,
+   "failedChecks": 0,
+   "passedChecks": 152648
+  },
+  "render": {
+   "identical": 27,
+   "pages": 27
+  },
+  "vera": "1.30.2"
+ },
+ "mn-dhs-4740-spa": {
+  "before": {
+   "failedRules": 7,
+   "failedChecks": 402,
+   "fails": {
+    "7.10-1": 1,
+    "7.18.5-2": 2,
+    "7.18.1-2": 2,
+    "7.4.2-1": 1,
+    "7.10-2": 1,
+    "7.21.8-1": 4,
+    "7.1-3": 391
+   }
+  },
+  "after": {
+   "compliant": true,
+   "failedRules": 0,
+   "failedChecks": 0,
+   "passedChecks": 134053
+  },
+  "render": {
+   "identical": 19,
+   "pages": 22
+  },
+  "vera": "1.30.2"
+ }
+}
