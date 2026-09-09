@@ -46,6 +46,15 @@ closed revenue.
   the primary play in this lane.** It stays only as a low-cost secondary touch
   on threads that already exist.
 
+### Channel reality check, 2026-09-09 (measured, not assumed)
+
+The primary channel above was named before it was measured. It has now been measured, and it is thinner than assumed:
+
+- **Open solicitations: one, and it is already answered.** All 182 currently-open PA state solicitations read first-hand; nationally only Mecklenburg qualifies, submitted 9/8. Six comparable RFPs (WA, Utah USBE, CT, NJ DOE, Fox Valley, Kansas) all posted Dec 2025 - Feb 2026 and closed. The next wave is a fiscal-year cluster, likely late 2026 / early 2027.
+- **Vendor pools: one exists.** Nine states swept; only Pennsylvania has an accessibility-specific vehicle (the ITQ Digital Accessibility category). All seven cooperatives are resale networks that cannot be joined directly.
+
+**So the channel narrows to one bet: the PA ITQ.** Rolling, home state, already a registered supplier, and it carries COSTARS to every PA local entity. The gate is a two-year experience requirement against a three-month-old LLC; the question is with DGS as of 9/9. This does not invalidate Gate 2 - cold email stays demoted at 0.93% - but it means the honest description of the channel is "one rolling vehicle plus a re-sweep every 2-3 weeks for the next RFP wave," not "a stream of open solicitations."
+
 ## Gate 3 — Kill bar
 
 - **Kill date:** 2026-09-30
