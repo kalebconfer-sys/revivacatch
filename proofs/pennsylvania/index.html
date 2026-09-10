@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pennsylvania public documents, measured</title><meta name="description" content="Twelve published Pennsylvania public documents measured against PDF/UA-1 with veraPDF, before and after remediation.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal-d:#0c5750;--ink:#102a26;--body:#44524e;--bg:#fff;--cream:#f7f5f1;--blush:#fbeae6;--gold:#c9893f;--line:#e7e2da;--red:#9b3a2a;--maxw:960px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--body);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Prata','Georgia',serif;color:var(--ink);font-weight:400;line-height:1.18}
+h1{font-size:clamp(1.6rem,3.6vw,2.3rem);text-wrap:balance}
+h2{font-size:1.45rem;margin:0 0 14px}
+h3{font-size:1.08rem;margin:0 0 4px}
+p{text-wrap:pretty}
+a{color:var(--teal)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+header.top{border-bottom:1px solid var(--line);background:rgba(255,255,255,.9)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;gap:16px;flex-wrap:wrap}
+.logo{font-family:'Prata',serif;font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--blush)}
+.sub{font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.hero{padding:44px 0 28px;background:linear-gradient(180deg,var(--cream),#fff)}
+.band{background:var(--ink);color:#fff;border-radius:16px;padding:26px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:26px 0}
+@media(max-width:680px){.band{grid-template-columns:1fr}}
+.band .l{color:#a9c4bf;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.band .n{font-family:'Prata',serif;font-size:2rem;color:#fff;line-height:1.1;margin:4px 0 2px}
+.band .s{color:#cfe0dd;font-size:.92rem}
+.band .fail{color:#f2b8a6}.band .pass{color:#9fe3c1}
+section{padding:30px 0;border-top:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--cream)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+ul.plain{padding-left:20px}
+ul.plain li{margin:6px 0}
+.note{background:var(--cream);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 10px 10px 0;margin:14px 0;font-size:.95rem}
+.dl{display:inline-block;background:var(--teal);color:#fff;font-weight:600;padding:11px 20px;border-radius:999px;text-decoration:none;margin:6px 8px 0 0}
+footer{background:var(--ink);color:#b9ccc8;padding:34px 0 26px;font-size:.9rem;margin-top:30px}
+footer a{color:#fff}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(--cream);padding:1px 5px;border-radius:4px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.doc{border:1px solid var(--line);border-radius:16px;padding:20px;background:#fff}
+.doc.win{border-color:var(--teal);box-shadow:0 2px 0 var(--blush)}
+.doc .k{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.doc h3{margin:6px 0 8px;font-size:1.06rem}
+.doc .row{display:flex;gap:14px;font-size:.9rem;margin:8px 0 12px;flex-wrap:wrap}
+.doc .row span b{color:var(--ink)}
+.issuer{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:24px 0 10px}
+</style></head><body>
+<header class="top"><div class="wrap"><a class="logo" href="/"><span class="dot"></span>RevivaCatch</a><span class="sub">Document accessibility &middot; PDF/UA proofs</span></div></header>
+
+<div class="hero"><div class="wrap"><span class="sub">Proof of work &middot; Pennsylvania public documents</span>
+<h1 style="margin-top:8px">The Board form a nurse with a disability uses to request an accommodation has fourteen unlabeled images and no headings.</h1>
+<p style="margin-top:14px;max-width:66ch">Twelve documents published by the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired by a deterministic pass, measured again, and raster-compared page by page so nothing visible changed. Two now pass with zero failed rules. The other ten are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
+<div class="band">
+  <div><div class="l">Documents measured</div><div class="n">12</div><div class="s">58 pages, three Pennsylvania issuers</div></div>
+  <div><div class="l">Failed rules before</div><div class="n fail">71</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
+  <div><div class="l">Failed rules after</div><div class="n pass">40</div><div class="s">Two files at zero, fully conforming</div></div>
+</div>
+</div></div>
+
+<section><div class="wrap">
+<h2>Two files conform</h2>
+<p style="max-width:66ch">These two carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
+<div class="docs" style="margin-top:18px">
+<div class="doc win"><div class="k">Pennsylvania State Board of Nursing</div><h3>Nurse Licensure Compact Act</h3>
+<div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 2 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>16/16</b> identical</span></div>
+<p style="font-size:.93rem">Sixteen pages, tagged but with no document title and two table headers with no scope. Both fixed; the file now validates clean.</p>
+<p style="margin-top:10px"><a class="dl" href="pa-nursing-licensure-compact-ua.pdf">Conforming PDF</a></p></div>
+
+<div class="doc win"><div class="k">Pennsylvania Department of Health</div><h3>Parent / Guardian Scoliosis Notification</h3>
+<div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 2 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>1/1</b> identical</span></div>
+<p style="font-size:.93rem">A one-page letter sent home to parents after a school screening. It had no title, so a screen reader announced the filename instead.</p>
+<p style="margin-top:10px"><a class="dl" href="padoh-scoliosis-notification-ua.pdf">Conforming PDF</a></p></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>Every file, measured</h2>
+<div class="scroll"><table>
+<thead><tr><th>Document</th><th class="num">Pages</th><th class="num">Before</th><th class="num">After</th><th>What is still failing, and why</th></tr></thead>
+<tbody>
+<tr><td colspan="5" class="issuer" style="background:var(--cream)">Pennsylvania Department of Health &mdash; school health forms</td></tr>
+<tr><td>Parent / Guardian Scoliosis Notification</td><td class="num">1</td><td class="num">2</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Nothing. Conforming, signed off.</td></tr>
+<tr><td>Certificate of Immunizations</td><td class="num">1</td><td class="num">2</td><td class="num">2</td><td>Two table rows contain a cell that is neither a header nor a data cell (7.2). Rebuilding a row structure changes meaning, so a human decides it.</td></tr>
+<tr><td>Medical Certificate</td><td class="num">2</td><td class="num">5</td><td class="num">2</td><td>Three fonts are referenced but not embedded (7.21.4.1). Embedding requires the licensed font files the agency used.</td></tr>
+<tr><td>School Dental Form</td><td class="num">2</td><td class="num">5</td><td class="num">3</td><td>Four unembedded fonts and three rows whose column counts disagree. 59 table headers had no scope; all 59 were fixed.</td></tr>
+<tr><td>Parent / Guardian Hearing Screening Notification</td><td class="num">1</td><td class="num">8</td><td class="num">5</td><td>It is a scan. The only machine-readable text on the page is the footer &ldquo;Reviewed 10/2025&rdquo;. A deterministic pass cannot OCR a page; that is human work.</td></tr>
+<tr><td>School Health Record</td><td class="num">4</td><td class="num">8</td><td class="num">7</td><td>99 table rows contain non-cell content and 6 rows disagree on column count (7.2). Four pages of clinical grid; the correct structure is a judgment call.</td></tr>
+<tr><td colspan="5" class="issuer" style="background:var(--cream)">Pennsylvania State Board of Nursing</td></tr>
+<tr><td>Nurse Licensure Compact Act</td><td class="num">16</td><td class="num">2</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Nothing. Conforming, signed off.</td></tr>
+<tr><td>Professional Nursing Law (Feb 2023)</td><td class="num">26</td><td class="num">8</td><td class="num">2</td><td>Arrived with no tag structure and no title at all. Now tagged and titled; two embedded CID fonts are missing a CIDToGIDMap stream (7.21.3.2).</td></tr>
+<tr><td>Request for Testing Accommodations (rev 06/2025)</td><td class="num">2</td><td class="num">9</td><td class="num">5</td><td>Fourteen images with no alternative text, no heading tags behind the visible SECTION 1/2/3 headings, five unembedded fonts, and zero form fields &mdash; it must be printed to be filled in.</td></tr>
+<tr><td colspan="5" class="issuer" style="background:var(--cream)">Erie County Department of Health</td></tr>
+<tr><td>Tuberculosis (TB) Referral</td><td class="num">1</td><td class="num">7</td><td class="num">3</td><td>47 form fields with no accessible name (7.18.4) and 64 pieces of content neither tagged nor marked as artifact.</td></tr>
+<tr><td>Animal Bite Report Form</td><td class="num">1</td><td class="num">7</td><td class="num">5</td><td>71 unnamed form fields, 56 untagged content items, one unembedded font.</td></tr>
+<tr><td>Communicable Disease Referral</td><td class="num">1</td><td class="num">8</td><td class="num">6</td><td>52 unnamed form fields, 64 untagged content items, one link with no description.</td></tr>
+</tbody></table></div>
+<div class="note"><b>Every &ldquo;after&rdquo; count above still includes one rule that is failing on purpose.</b> Clause 5 is the PDF/UA conformance identifier. This pipeline refuses to write it. A file gets that identifier only after a validator has independently passed everything else, which is why ten of these twelve are published as failing rather than stamped and called done.</div>
+</div></section>
+
+<section><div class="wrap"><h2>How to read these</h2>
+<ul class="plain">
+<li><b>Before / after</b> are veraPDF 1.30.2 failed-rule counts on the published file and on the remediated file, same profile, same version.</li>
+<li><b>Rendering</b> is a 100 dpi raster comparison of every page. Both conforming files are pixel-identical to what the agency published.</li>
+<li><b>What is still failing</b> is the part that matters. Unembedded fonts need the agency's font licences. Alt text, heading rank, and table structure are meaning, not syntax, and a script that guesses at them produces a file that passes a validator and still fails a reader.</li>
+<li>Source documents are Pennsylvania public records, reproduced here for a technical demonstration. They remain the property of their issuing agencies.</li>
+</ul>
+<p style="margin-top:18px"><a href="../">See the translated-document proofs</a> &mdash; four state files where translation broke the tagging.</p>
+</div></section>
+
+<footer><div class="wrap"><p><b style="color:#fff">RevivaCatch LLC</b> &middot; 6119 Spires Drive, Erie, PA 16509 &middot; <a href="mailto:kaleb@revivacatch.com">kaleb@revivacatch.com</a> &middot; (814) 954-9300</p>
+<p style="margin-top:8px;font-size:.82rem;color:#8ba39e">Validation: veraPDF 1.30.2, profile PDF/UA-1 (ISO 14289-1). Rendering comparison: 100 dpi raster of every page, source against remediated. Every change is deterministic and reproducible from the source file. Measured 2026-09-09 and 2026-09-10.</p></div></footer></body></html>
