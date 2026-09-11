@@ -50,19 +50,24 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 <header class="top"><div class="wrap"><a class="logo" href="/"><span class="dot"></span>RevivaCatch</a><span class="sub">Document accessibility &middot; PDF/UA proofs</span></div></header>
 
 <div class="hero"><div class="wrap"><span class="sub">Proof of work &middot; Pennsylvania public documents</span>
-<h1 style="margin-top:8px">The Board form a nurse with a disability uses to request an accommodation has fourteen unlabeled images and no headings.</h1>
-<p style="margin-top:14px;max-width:66ch">Twelve documents published by the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired by a deterministic pass, measured again, and raster-compared page by page so nothing visible changed. Two now pass with zero failed rules. The other ten are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
+<h1 style="margin-top:8px">The form a nurse with a disability uses to request a testing accommodation failed nine accessibility rules. It now fails none.</h1>
+<p style="margin-top:14px;max-width:66ch">Twelve documents published by the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired, measured again, and compared against the original page by page - by raster where the fix was structural, and word by word where a font had to be embedded. Three now pass with zero failed rules, including the Board&rsquo;s own Request Form for Testing Accommodations. The other nine are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
 <div class="band">
   <div><div class="l">Documents measured</div><div class="n">12</div><div class="s">58 pages, three Pennsylvania issuers</div></div>
   <div><div class="l">Failed rules before</div><div class="n fail">71</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
-  <div><div class="l">Failed rules after</div><div class="n pass">40</div><div class="s">Two files at zero, fully conforming</div></div>
+  <div><div class="l">Failed rules after</div><div class="n pass">35</div><div class="s">Three files at zero, fully conforming</div></div>
 </div>
 </div></div>
 
 <section><div class="wrap">
-<h2>Two files conform</h2>
-<p style="max-width:66ch">These two carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
+<h2>Three files conform</h2>
+<p style="max-width:66ch">These three carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
 <div class="docs" style="margin-top:18px">
+<div class="doc win"><div class="k">Pennsylvania State Board of Nursing</div><h3>Request Form for Testing Accommodations (rev 06/2025)</h3>
+<div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 9 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Text <b>397/397</b> words unmoved</span></div>
+<p style="font-size:.93rem">Fourteen horizontal rules were tagged as figures, so a screen reader stopped at each one expecting a description. They are decoration, so they are now artifacts. Two headings skipped levels. Five fonts were named but not carried, which is why it is the one file here whose pages are not pixel-identical &mdash; see the note below.</p>
+<p style="margin-top:10px"><a class="dl" href="pa-nursing-testing-accommodations-ua.pdf">Conforming PDF</a></p></div>
+
 <div class="doc win"><div class="k">Pennsylvania State Board of Nursing</div><h3>Nurse Licensure Compact Act</h3>
 <div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 2 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>16/16</b> identical</span></div>
 <p style="font-size:.93rem">Sixteen pages, tagged but with no document title and two table headers with no scope. Both fixed; the file now validates clean.</p>
@@ -73,6 +78,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 <p style="font-size:.93rem">A one-page letter sent home to parents after a school screening. It had no title, so a screen reader announced the filename instead.</p>
 <p style="margin-top:10px"><a class="dl" href="padoh-scoliosis-notification-ua.pdf">Conforming PDF</a></p></div>
 </div>
+<div class="note"><b>About the fonts, because it is the one claim on this page that needs a caveat.</b> The accommodations form names Arial and Times New Roman but does not carry them, so what a reader sees today depends on which fonts that reader&rsquo;s machine happens to have. That is the defect the rule exists to prevent. The remediated file embeds the same typefaces the document already names, subset to the glyphs actually drawn, after checking each font&rsquo;s own embedding-permission bits. Every one of the 397 words sits in the same place to within half a point; what changes is that the letterforms are now fixed rather than guessed. The other two files are byte-for-byte pixel-identical.</div>
 </div></section>
 
 <section><div class="wrap">
@@ -90,7 +96,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 <tr><td colspan="5" class="issuer" style="background:var(--cream)">Pennsylvania State Board of Nursing</td></tr>
 <tr><td>Nurse Licensure Compact Act</td><td class="num">16</td><td class="num">2</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Nothing. Conforming, signed off.</td></tr>
 <tr><td>Professional Nursing Law (Feb 2023)</td><td class="num">26</td><td class="num">8</td><td class="num">2</td><td>Arrived with no tag structure and no title at all. Now tagged and titled; two embedded CID fonts are missing a CIDToGIDMap stream (7.21.3.2).</td></tr>
-<tr><td>Request for Testing Accommodations (rev 06/2025)</td><td class="num">2</td><td class="num">9</td><td class="num">5</td><td>Fourteen images with no alternative text, no heading tags behind the visible SECTION 1/2/3 headings, five unembedded fonts, and zero form fields &mdash; it must be printed to be filled in.</td></tr>
+<tr><td>Request Form for Testing Accommodations (rev 06/2025)</td><td class="num">2</td><td class="num">9</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Conforming, signed off. It still has zero form fields, so it must be printed to be completed &mdash; that is a design decision for the Board, not a validator failure.</td></tr>
 <tr><td colspan="5" class="issuer" style="background:var(--cream)">Erie County Department of Health</td></tr>
 <tr><td>Tuberculosis (TB) Referral</td><td class="num">1</td><td class="num">7</td><td class="num">3</td><td>47 form fields with no accessible name (7.18.4) and 64 pieces of content neither tagged nor marked as artifact.</td></tr>
 <tr><td>Animal Bite Report Form</td><td class="num">1</td><td class="num">7</td><td class="num">5</td><td>71 unnamed form fields, 56 untagged content items, one unembedded font.</td></tr>
