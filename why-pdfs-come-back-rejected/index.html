@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why your remediated PDF came back rejected: five causes and how to tell which one you have</title>
+<meta name="description" content="A PDF can pass Acrobat's built-in accessibility checker and still be rejected under PDF/UA-1. Five diagnoses you can run yourself in a few minutes, with real measurements from published government documents.">
+<link rel="canonical" href="https://revivacatch.com/why-pdfs-come-back-rejected/">
+<meta property="og:title" content="Why your remediated PDF came back rejected">
+<meta property="og:description" content="Five causes, each with a test you can run yourself. Real measurements from published government PDFs.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://revivacatch.com/why-pdfs-come-back-rejected/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal-d:#0c5750;--ink:#102a26;--body:#44524e;--bg:#fff;--cream:#f7f5f1;--blush:#fbeae6;--gold:#c9893f;--line:#e7e2da;--red:#9b3a2a;--maxw:780px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--body);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Prata','Georgia',serif;color:var(--ink);font-weight:400;line-height:1.2}
+h1{font-size:clamp(1.9rem,4.4vw,2.7rem);text-wrap:balance;margin-bottom:14px}
+h2{font-size:clamp(1.3rem,2.6vw,1.6rem);margin:0 0 12px}
+h3{font-size:1.06rem;margin:0 0 6px;font-family:'Hanken Grotesk',sans-serif;font-weight:700;color:var(--ink)}
+p{text-wrap:pretty;margin-bottom:16px;font-size:1.04rem}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+header.top{border-bottom:1px solid var(--line);background:rgba(255,255,255,.94);position:sticky;top:0;z-index:5}
+header.top .wrap{max-width:1080px;display:flex;justify-content:space-between;align-items:center;height:62px;gap:16px}
+.logo{font-family:'Prata',serif;font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--blush)}
+.navlink{font-size:.95rem;font-weight:600;color:var(--teal);text-decoration:none}
+.hero{padding:52px 0 26px;background:linear-gradient(180deg,var(--cream),#fff)}
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.standfirst{font-size:1.16rem;color:var(--ink)}
+.byline{font-size:.9rem;color:var(--body);border-top:1px solid var(--line);padding-top:14px;margin-top:22px}
+article{padding:26px 0 10px}
+.diag{border:1px solid var(--line);border-radius:14px;padding:24px;margin:0 0 22px;background:#fff}
+.toc{margin:0 0 30px;padding:0;list-style:none;counter-reset:t}
+.toc li{border-bottom:1px solid var(--line);padding:11px 0}
+.toc li:first-child{border-top:1px solid var(--line)}
+.toc a{text-decoration:none;font-weight:600;font-size:1.02rem}
+.toc a:hover{text-decoration:underline}
+.test{background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:15px 18px;margin:16px 0 2px;font-size:.98rem}
+.test b{color:var(--ink);display:block;margin-bottom:4px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.93em;background:var(--cream);padding:1px 6px;border-radius:5px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:.95rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);font-weight:700}
+td.no{color:var(--red);font-weight:600}
+td.yes{color:var(--teal);font-weight:600}
+.scroller{overflow-x:auto}
+.callout{background:var(--ink);color:#e7efed;border-radius:16px;padding:26px 28px;margin:30px 0}
+.callout h2{color:#fff;margin-bottom:10px}
+.callout p{color:#cfe0dd;margin-bottom:12px}
+.callout p:last-child{margin-bottom:0}
+.callout a{color:#9fe3c1}
+.limits{border:1px dashed var(--line);border-radius:14px;padding:20px 24px;margin:28px 0;background:var(--cream)}
+.limits li{margin:0 0 8px 18px;font-size:1rem}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:28px 0 40px;font-size:.92rem}
+footer p{margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><span class="dot" aria-hidden="true"></span>RevivaCatch</a>
+    <a class="navlink" href="/pdf-check/">Free PDF check</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="kicker">Document accessibility</p>
+    <h1>Why your remediated PDF came back rejected</h1>
+    <p class="standfirst">A file can pass Adobe Acrobat's built-in accessibility checker and still be
+    rejected by the person you sent it to. That is not bad luck and it is usually not sloppy work.
+    It is almost always one of five specific things, and you can find out which one in a few minutes
+    without buying anything.</p>
+    <p class="byline">Written by Kaleb Confer, RevivaCatch LLC, Erie, Pennsylvania. Every number below
+    comes from a real published government document, measured with veraPDF. Nothing here is theoretical.</p>
+  </div>
+</div>
+
+<article>
+<div class="wrap">
+
+  <p>First, the thing that explains most rejections on its own: <strong>the two sides are running
+  different checkers.</strong> Acrobat's built-in accessibility check and the PDF/UA-1 standard
+  (ISO 14289-1) are not the same bar, and they are not close. veraPDF, the open-source reference
+  validator for PDF/UA-1, checks 106 rules. Acrobat checks a shorter, friendlier list.</p>
+
+  <ul class="toc">
+    <li><a href="#no-text">The document has no text in it at all</a></li>
+    <li><a href="#printed-not-saved">It was printed to PDF instead of saved as PDF</a></li>
+    <li><a href="#flag-stamped-early">The PDF/UA flag was written before the file earned it</a></li>
+    <li><a href="#invented-alt-text">Alt text was invented for things that are not pictures</a></li>
+    <li><a href="#fonts-not-embedded">The fonts are named but not carried</a></li>
+  </ul>
+
+  <p>So a vendor runs Acrobat, sees green, and ships. The client's reviewer runs veraPDF or PAC,
+  sees failures, and rejects. Both are telling the truth. Here is how to find out which specific
+  failure you have.</p>
+
+  <div class="diag">
+    <h2 id="no-text">The document has no text in it at all</h2>
+    <p>If the PDF is a photograph of paper, scanned on an office copier, there are zero characters
+    inside it. There is nothing to tag, because tagging attaches structure to text, and there is no
+    text. No remediation tool can fix this. Not mine, not anyone's. It needs OCR first to create a
+    text layer, and machine OCR makes mistakes that a person has to catch.</p>
+    <p>This is far more common than people expect. A 119-page municipal comprehensive plan I measured
+    was 9.3 MB and contained <strong>zero readable characters</strong>. A city's monthly financial
+    reports, 159 pages across seven files, were all copier scans with nothing inside them.</p>
+    <div class="test">
+      <b>The test, 10 seconds</b>
+      Open the PDF and try to select a sentence with your cursor. If you cannot highlight individual
+      words, if the selection box snaps to a rectangle over the whole page, or nothing selects at
+      all, it is an image. Ctrl+F for a word you can see on screen is the same test.
+      <p style="margin:10px 0 0"><a href="/pdf-check/">The free check on this site</a> reports the
+      exact character count per page, which also catches the common case of a typed document with
+      a few scanned pages inserted into it.</p>
+    </div>
+  </div>
+
+  <div class="diag">
+    <h2 id="printed-not-saved">It was printed to PDF instead of saved as PDF</h2>
+    <p>This one is nearly deterministic, and it is the most useful thing on this page because the fix
+    is free. Every PDF records which program produced it. That field predicts whether the file has
+    accessibility tags with startling reliability.</p>
+    <p>When you use <strong>File &gt; Print</strong> and choose a PDF printer, the print driver
+    receives only a picture of the page. Headings, lists, table structure, alt text and reading order
+    are all discarded before the PDF is written. There is nothing left to tag. When you use
+    <strong>File &gt; Save As &gt; PDF</strong> (or Export), Word hands that structure over intact.</p>
+    <div class="scroller">
+    <table>
+      <thead><tr><th>Producer recorded in the file</th><th>What made it</th><th>Tagged?</th></tr></thead>
+      <tbody>
+        <tr><td><code>Acrobat PDFMaker for Word</code></td><td>The Acrobat ribbon in Word</td><td class="yes">Yes</td></tr>
+        <tr><td><code>Microsoft&#174; Word</code></td><td>Word's own Save As PDF</td><td class="yes">Yes</td></tr>
+        <tr><td><code>PScript5.dll</code></td><td>File &gt; Print to a PDF printer</td><td class="no">Never</td></tr>
+        <tr><td><code>KMBT_223</code>, <code>SKM_C360i</code>, <code>RICOH IM</code></td><td>An office copier</td><td class="no">Never, and no text either</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="test">
+      <b>The test, 20 seconds</b>
+      In Acrobat or any PDF reader, open <em>File &gt; Properties</em> and read the
+      <em>Application</em> and <em>PDF Producer</em> lines. If you see a print driver or a copier
+      model number, stop remediating and go back to the source document. Re-exporting correctly is
+      free and gets you further than hours of manual tagging on a file that lost its structure before
+      it was born.
+    </div>
+  </div>
+
+  <div class="diag">
+    <h2 id="flag-stamped-early">The PDF/UA flag was written before the file earned it</h2>
+    <p>There is a metadata identifier a file can carry that declares "this document conforms to
+    PDF/UA-1." Some tools write it as a matter of course at the end of a remediation run.</p>
+    <p>Writing that flag does not make a document conform. It makes a document <em>claim</em> to
+    conform. If the file still has untagged content or missing alt text, the flag turns a quiet
+    problem into a loud one: now the validator reports a false conformance claim, and a reviewer who
+    sees that stops trusting the whole file.</p>
+    <p><strong>This is the single most common reason a file passes on the vendor's side and is
+    rejected on the client's.</strong> The vendor's tool wrote the flag and reported success. The
+    client's validator read the flag, checked the claim, and found it false.</p>
+    <div class="test">
+      <b>The test</b>
+      Run the file through veraPDF. It is free and open source. If the report names clause 5,
+      the <code>pdfuaid</code> identifier, or a conformance-claim failure, the flag was stamped early.
+      The fix is to remove the flag, fix the real failures, and only then write it back.
+    </div>
+  </div>
+
+  <div class="diag">
+    <h2 id="invented-alt-text">Alt text was invented for things that are not pictures</h2>
+    <p>A validator reporting "figure missing alternate text" does not mean the document contains a
+    photograph. It means something is <em>tagged</em> as a figure. Those are different claims, and the
+    difference decides whether the fix is right or wrong.</p>
+    <p>A real example. The Pennsylvania State Board of Nursing's Request Form for Testing
+    Accommodations reported fourteen figures with no alternate text. Fourteen missing descriptions
+    sounds like a document full of undescribed images. It was not. All fourteen were
+    <strong>horizontal rules</strong>: the fill-in lines and section dividers, between 2.9 and 4.1
+    points tall.</p>
+    <p>Writing fourteen captions for fourteen lines would have satisfied the checker and made the
+    document worse: a screen reader user would hear fourteen descriptions of decoration. The correct
+    fix is to mark them as artifacts, which is what decoration is. Same green checkmark, opposite
+    outcome for the person actually using it.</p>
+    <div class="test">
+      <b>The test</b>
+      Before writing alt text for anything, look at it on the page. If you cannot see a picture where
+      the validator says a figure is, it is decoration and belongs in the artifact layer, not in a
+      caption.
+    </div>
+  </div>
+
+  <div class="diag">
+    <h2 id="fonts-not-embedded">The fonts are named but not carried</h2>
+    <p>A PDF can reference Arial without containing Arial. Open it on a machine that has Arial and it
+    looks right. Open it anywhere else and the viewer substitutes something else, and character
+    positions shift. Under PDF/UA this is a failure, because the file does not actually specify what
+    it renders.</p>
+    <p>This one is genuinely fixable but has a real constraint: embedding a font requires that the
+    font's own licence permit embedding. That permission is recorded inside the font file. It is
+    checkable, and it is not always granted. This is one of the rules that honestly cannot always be
+    cleared from the PDF alone, without the original source file or a licence.</p>
+    <p>There is a related trap worth knowing. A subset font with no character map extracts as raw
+    glyph numbers rather than letters. I have measured a file whose text came out as
+    <code>/0 /1 /2 /3</code>. The document looked perfect on screen and was unreadable to every
+    machine. It was, as it happens, the attendee list for an accessibility procurement conference.</p>
+    <div class="test">
+      <b>The test</b>
+      <em>File &gt; Properties &gt; Fonts</em>. Every entry should say <em>Embedded</em> or
+      <em>Embedded Subset</em>. Any font listed without one of those words is named but not carried.
+    </div>
+  </div>
+
+  <div class="callout">
+    <h2>What a finished file should come with</h2>
+    <p>Whoever does this work for you (me, another vendor, or your own team), the deliverable should
+    include the validator report next to the file, not just an assurance. veraPDF's output is
+    machine-readable and names every rule it checked. If your client rejected the last version, that
+    report is what you forward to them.</p>
+    <p>Nine government documents I have remediated are published with their before-and-after
+    measurements, including the Board of Nursing form described above, which went from nine failed
+    rules to zero of 106: <a href="/proofs/">see the measured files</a>.</p>
+  </div>
+
+  <h2>What this page is not</h2>
+  <div class="limits">
+    <ul>
+      <li>I hold no accessibility certification, and I do not author VPATs.</li>
+      <li>I do not test with screen readers or other assistive technology, and I will not claim to.
+          Conformance to PDF/UA-1 is measurable; usability by a real person is a broader question
+          that needs people who use those tools daily.</li>
+      <li>Passing a validator is not the same as meeting a legal obligation. Neither the ADA nor
+          Section 508 certifies individual documents. Whether your obligation is met is a judgment
+          for your counsel, not for a checker and not for me.</li>
+      <li>Nothing here is legal advice.</li>
+    </ul>
+  </div>
+
+  <p>If you have a file that keeps coming back and none of the five above explains it, send it over
+  and I will tell you what the validator says, at no charge and with no obligation. That is a
+  measurement, not a sales call. If the answer is that your current vendor is doing it right, I will
+  say so.</p>
+
+</div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <p><strong>RevivaCatch LLC</strong>, 6119 Spires Drive, Erie, PA 16509. <a href="mailto:kaleb@revivacatch.com">kaleb@revivacatch.com</a></p>
+    <p><a href="/">Home</a> &middot; <a href="/pdf-check/">Free PDF check</a> &middot; <a href="/proofs/">Measured files</a> &middot;
+       <a href="/privacy-policy.html">Privacy</a> &middot;
+       <a href="/terms-of-service.html">Terms</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

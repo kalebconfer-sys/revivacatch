@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free PDF accessibility pre-check: does your file even have text in it?</title>
+<meta name="description" content="Drop a PDF in and find out in seconds whether it has a text layer, whether it is tagged, what produced it, and whether it has a title. Runs entirely in your browser. Your file is never uploaded.">
+<link rel="canonical" href="https://revivacatch.com/pdf-check/">
+<meta property="og:title" content="Free PDF accessibility pre-check">
+<meta property="og:description" content="Five checks that decide whether a PDF can be remediated at all. Runs in your browser; the file is never uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://revivacatch.com/pdf-check/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#0f766e;--teal-d:#0c5750;--ink:#102a26;--body:#44524e;--bg:#fff;--cream:#f7f5f1;--blush:#fbeae6;--gold:#c9893f;--line:#e7e2da;--red:#9b3a2a;--amber:#8a6212;--maxw:820px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--body);background:var(--bg);line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:'Prata','Georgia',serif;color:var(--ink);font-weight:400;line-height:1.2}
+h1{font-size:clamp(1.8rem,4.2vw,2.5rem);text-wrap:balance;margin-bottom:14px}
+h2{font-size:clamp(1.2rem,2.4vw,1.5rem);margin:0 0 12px}
+p{text-wrap:pretty;margin-bottom:15px;font-size:1.03rem}
+a{color:var(--teal)}
+a:focus-visible,button:focus-visible,#drop:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+header.top{border-bottom:1px solid var(--line);background:rgba(255,255,255,.94)}
+header.top .wrap{max-width:1080px;display:flex;justify-content:space-between;align-items:center;height:62px;gap:16px}
+.logo{font-family:'Prata',serif;font-size:1.2rem;color:var(--ink);display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--blush)}
+.navlink{font-size:.95rem;font-weight:600;color:var(--teal);text-decoration:none}
+.hero{padding:48px 0 22px;background:linear-gradient(180deg,var(--cream),#fff)}
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:11px}
+.standfirst{font-size:1.14rem;color:var(--ink)}
+main{padding:20px 0 10px}
+#drop{border:2px dashed var(--line);border-radius:18px;background:var(--cream);padding:40px 26px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+#drop:hover,#drop.over{border-color:var(--teal);background:#fff}
+#drop p{margin:0 0 6px;font-size:1.06rem;color:var(--ink);font-weight:600}
+#drop small{color:var(--body);font-size:.93rem}
+#file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.privacy{font-size:.93rem;text-align:center;margin:14px 0 0;color:var(--body)}
+#status{margin:22px 0 0;font-size:1rem;color:var(--ink)}
+#results{margin:26px 0 0}
+.summary{border-radius:16px;padding:22px 24px;margin-bottom:20px;background:var(--ink);color:#e7efed}
+.summary h2{color:#fff;margin-bottom:8px}
+.summary p{color:#cfe0dd;margin:0}
+.summary .fname{font-size:.86rem;color:#9ab5b0;letter-spacing:.04em;margin-bottom:10px;overflow-wrap:anywhere}
+.check{border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-bottom:12px;background:#fff}
+.check .head{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.check .mark{font-weight:700;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.ok .mark{background:#e4f2ec;color:var(--teal-d)}
+.warn .mark{background:#fbf0d8;color:var(--amber)}
+.bad .mark{background:var(--blush);color:var(--red)}
+.check .name{font-weight:700;color:var(--ink);font-size:1.03rem}
+.check .detail{font-size:.99rem;margin:0}
+.check .detail + .detail{margin-top:7px}
+.check .why{font-size:.95rem;margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:var(--cream);padding:1px 6px;border-radius:5px;color:var(--ink);overflow-wrap:anywhere}
+.limits{border:1px dashed var(--line);border-radius:14px;padding:20px 24px;margin:30px 0;background:var(--cream)}
+.limits li{margin:0 0 8px 18px;font-size:1rem}
+footer{border-top:1px solid var(--line);margin-top:42px;padding:26px 0 40px;font-size:.92rem}
+footer p{margin-bottom:8px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><span class="dot" aria-hidden="true"></span>RevivaCatch</a>
+    <a class="navlink" href="/why-pdfs-come-back-rejected/">Why PDFs get rejected</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="kicker">Free, no sign-up</p>
+    <h1>PDF accessibility pre-check</h1>
+    <p class="standfirst">Five checks that decide whether a PDF can be made accessible at all, and
+    roughly how much work it will be. It runs inside your browser using Mozilla's pdf.js. Your file
+    is never uploaded, never stored, and never seen by me.</p>
+  </div>
+</div>
+
+<main>
+<div class="wrap">
+
+  <div id="drop" tabindex="0" role="button" aria-describedby="drophint">
+    <p>Drop a PDF here, or press to choose one</p>
+    <small id="drophint">Nothing is uploaded. The file is read in this tab and discarded when you close it.</small>
+  </div>
+  <input type="file" id="file" accept="application/pdf,.pdf">
+
+  <p class="privacy">Large files take a moment. A 500-page document reads in about ten seconds.</p>
+
+  <p id="status" role="status" aria-live="polite"></p>
+  <div id="results"></div>
+
+  <div class="limits">
+    <h2>What this does not check</h2>
+    <p>This is a pre-check, not a conformance test, and the gap between the two is large. It reads
+    five structural facts that are cheap to read and that decide whether remediation is even
+    possible. It does not evaluate:</p>
+    <ul>
+      <li>whether alternative text is <em>correct</em>, only whether images exist</li>
+      <li>reading order, which is the single most common real-world defect</li>
+      <li>table header cells and scope</li>
+      <li>heading rank and nesting</li>
+      <li>font embedding, colour contrast, or form field labelling</li>
+      <li>roughly 100 other rules that veraPDF checks against PDF/UA-1</li>
+    </ul>
+    <p>A file that looks clean here can still fail PDF/UA-1. A file that fails here will definitely
+    fail it. For a real answer, run <a href="https://verapdf.org/" rel="noopener">veraPDF</a>, which
+    is free and open source, or send the file to someone who will run it for you and show you the
+    report.</p>
+  </div>
+
+  <p>If this tells you something you did not expect and you want a second opinion, send the file to
+  <a href="mailto:kaleb@revivacatch.com">kaleb@revivacatch.com</a> and I will run the full validator
+  and tell you what it says, at no charge. If the answer is that your document is fine, I will say
+  that. <a href="/proofs/">Nine documents I have measured and remediated are published here</a>,
+  before and after.</p>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>RevivaCatch LLC</strong>, 6119 Spires Drive, Erie, PA 16509.
+       <a href="mailto:kaleb@revivacatch.com">kaleb@revivacatch.com</a></p>
+    <p><a href="/">Home</a> &middot; <a href="/why-pdfs-come-back-rejected/">Why PDFs get rejected</a>
+       &middot; <a href="/proofs/">Measured files</a> &middot;
+       <a href="/privacy-policy.html">Privacy</a> &middot;
+       <a href="/terms-of-service.html">Terms</a></p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (!window.pdfjsLib) {
+    document.getElementById("status").textContent =
+      "The PDF library did not load, so the check cannot run. A script blocker or an offline " +
+      "connection will do this.";
+    return;
+  }
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  var drop = document.getElementById("drop"),
+      input = document.getElementById("file"),
+      status = document.getElementById("status"),
+      results = document.getElementById("results");
+
+  // A producer string is a hint, never a verdict. The text-layer check is the verdict.
+  var PRINT_DRIVER = /(pscript|postscript driver|print to pdf|pdfcreator|cutepdf|bullzip|win2pdf|microsoft: print)/i;
+  var COPIER = /(kmbt|skm_|bizhub|ricoh|konica|canon ir|ir-adv|workcentre|xerox|mfp|scanner|epson|papercut|toshiba e-studio)/i;
+  var GOOD = /(acrobat pdfmaker|microsoft.{0,3} word|microsoft.{0,3} powerpoint|microsoft.{0,3} excel|libreoffice|indesign|pages|google docs)/i;
+  // A title that just repeats a filename tells a screen reader nothing useful.
+  var JUNK_TITLE = /(^microsoft word -|^microsoft powerpoint -|\.(docx?|pptx?|xlsx?|indd|pdf)$|^skm_|^kmbt|^untitled$|^document\d*$|^\s*$)/i;
+
+  function esc(s) {
+    return String(s === undefined || s === null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function card(level, name, details, why) {
+    var label = level === "ok" ? "Looks fine" : (level === "warn" ? "Worth a look" : "Problem");
+    var d = details.map(function (t) { return '<p class="detail">' + t + "</p>"; }).join("");
+    return '<div class="check ' + level + '"><div class="head"><span class="mark">' + label +
+           '</span><span class="name">' + esc(name) + "</span></div>" + d +
+           (why ? '<p class="why">' + why + "</p>" : "") + "</div>";
+  }
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + " bytes";
+    if (n < 1048576) return (n / 1024).toFixed(0) + " KB";
+    return (n / 1048576).toFixed(1) + " MB";
+  }
+
+  function run(file) {
+    results.innerHTML = "";
+    if (!file) { return; }
+    if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") {
+      status.textContent = "That is not a PDF. This check only reads PDF files.";
+      return;
+    }
+    status.textContent = "Reading " + file.name + "…";
+
+    var fr = new FileReader();
+    fr.onerror = function () { status.textContent = "The file could not be read."; };
+    fr.onload = function () {
+      pdfjsLib.getDocument({ data: new Uint8Array(fr.result), isEvalSupported: false })
+        .promise.then(function (pdf) { return inspect(pdf, file); })
+        .then(function (html) { status.textContent = ""; results.innerHTML = html; })
+        .catch(function (err) {
+          var m = String(err && err.message || err);
+          status.textContent = /password/i.test(m)
+            ? "This PDF is password protected, so it cannot be read without the password."
+            : "The file could not be opened as a PDF. " + m;
+        });
+    };
+    fr.readAsArrayBuffer(file);
+  }
+
+  function inspect(pdf, file) {
+    var pages = pdf.numPages;
+    return Promise.all([
+      pdf.getMetadata().catch(function () { return { info: {} }; }),
+      // getMarkInfo() resolves to null when the PDF has no /MarkInfo dictionary at all,
+      // which is the normal state of an untagged file. Only a thrown error means unreadable.
+      pdf.getMarkInfo ? pdf.getMarkInfo().catch(function () { return undefined; })
+                      : Promise.resolve(undefined),
+      pdf.getOutline().catch(function () { return null; }),
+      textStats(pdf, pages)
+    ]).then(function (r) {
+      var info = (r[0] && r[0].info) || {},
+          mark = r[1], outline = r[2], t = r[3];
+      var out = [];
+
+      // -- summary -------------------------------------------------------
+      var headline;
+      if (t.chars === 0) {
+        headline = "This document contains no text at all. It is a set of images, so there is " +
+                   "nothing for a screen reader to read and nothing to tag.";
+      } else if (t.emptyPages > 0) {
+        headline = t.emptyPages + " of " + pages + " page" + (pages === 1 ? "" : "s") +
+                   " contain no text. Those pages are images.";
+      } else if (mark && mark.Marked) {
+        headline = "This document has a text layer and carries accessibility tags. That is the " +
+                   "right starting point; whether the tags are correct is a separate question.";
+      } else {
+        headline = "This document has a text layer but no accessibility tags, so assistive " +
+                   "technology has no structure to work with.";
+      }
+      out.push('<div class="summary"><p class="fname">' + esc(file.name) + " &middot; " +
+               fmtBytes(file.size) + " &middot; " + pages + " page" + (pages === 1 ? "" : "s") +
+               '</p><h2>What this file is</h2><p>' + esc(headline) + "</p></div>");
+
+      // -- 1. text layer -------------------------------------------------
+      if (t.chars === 0) {
+        out.push(card("bad", "Text layer", [
+          "Zero readable characters across all " + pages + " page" + (pages === 1 ? "" : "s") + "."
+        ], "No remediation tool can fix this, because tagging attaches structure to text and there " +
+           "is no text. The file needs OCR first to create a text layer, and machine OCR makes " +
+           "mistakes that a person has to proofread against the original. " +
+           '<a href="/why-pdfs-come-back-rejected/#no-text">More on this</a>.'));
+      } else if (t.emptyPages > 0) {
+        out.push(card("warn", "Text layer", [
+          t.chars.toLocaleString() + " characters found, but " + t.emptyPages + " page" +
+          (t.emptyPages === 1 ? " has" : "s have") + " none."
+        ], "Mixed documents like this are usually a typed file with scanned pages inserted. The " +
+           "scanned pages need OCR before anything else can be done with them."));
+      } else {
+        out.push(card("ok", "Text layer", [
+          t.chars.toLocaleString() + " characters across " + pages + " page" +
+          (pages === 1 ? "" : "s") + ", with none empty."
+        ], ""));
+      }
+
+      // -- 2. producer ---------------------------------------------------
+      var prod = info.Producer || "", creat = info.Creator || "", both = prod + " " + creat;
+      var shown = [];
+      if (creat) shown.push("Created by <code>" + esc(creat) + "</code>");
+      if (prod) shown.push("Produced by <code>" + esc(prod) + "</code>");
+      if (!shown.length) shown.push("This file records no creating application.");
+      if (COPIER.test(both)) {
+        out.push(card("bad", "What produced the file", shown,
+          "That is an office copier or scanner. Files from a copier are photographs of paper and " +
+          "carry no text and no structure. If a digital original of this document exists anywhere, " +
+          "using it will save far more time than remediating the scan. " +
+          '<a href="/why-pdfs-come-back-rejected/#printed-not-saved">More on this</a>.'));
+      } else if (PRINT_DRIVER.test(both)) {
+        out.push(card("bad", "What produced the file", shown,
+          "That is a print driver, which means the file was made with File &gt; Print rather than " +
+          "File &gt; Save As. The print path throws away headings, lists, table structure and " +
+          "reading order before the PDF is written. Re-exporting the source document with Save As " +
+          "is free and gets you further than hours of manual tagging. " +
+          '<a href="/why-pdfs-come-back-rejected/#printed-not-saved">More on this</a>.'));
+      } else if (GOOD.test(both)) {
+        out.push(card("ok", "What produced the file", shown,
+          "That application can carry structure through into the PDF, so the source document is a " +
+          "usable starting point."));
+      } else {
+        out.push(card("warn", "What produced the file", shown,
+          "I do not recognise this producer, so it is not evidence either way. The text-layer and " +
+          "tagging results above and below are the ones that matter."));
+      }
+
+      // -- 3. tags -------------------------------------------------------
+      if (mark === undefined) {
+        out.push(card("warn", "Accessibility tags",
+          ["Tag information could not be read from this file."], ""));
+      } else if (mark && mark.Marked) {
+        out.push(card("ok", "Accessibility tags", ["The document is marked as tagged."],
+          "Being tagged is necessary but not sufficient. Tags can be present and wrong, which is " +
+          "the usual reason a remediated file is still rejected."));
+      } else {
+        out.push(card("bad", "Accessibility tags", ["No tag structure is present."],
+          "Assistive technology has nothing to navigate by: no headings, no lists, no table " +
+          "structure, no defined reading order. This is the main body of remediation work."));
+      }
+
+      // -- 4. title ------------------------------------------------------
+      var title = (info.Title || "").trim();
+      if (!title) {
+        out.push(card("bad", "Document title", ["No title is set."],
+          "A screen reader announces the title when the document opens. With none set, it reads " +
+          "out the filename instead. This is one of the cheapest defects to fix and one of the " +
+          "most commonly missed."));
+      } else if (JUNK_TITLE.test(title) || title.toLowerCase() === file.name.toLowerCase()) {
+        out.push(card("warn", "Document title", ["The title is <code>" + esc(title) + "</code>."],
+          "That is a filename rather than a title. It is what a screen reader will announce when " +
+          "the document opens, so it should describe the document to a person."));
+      } else {
+        out.push(card("ok", "Document title", ["The title is <code>" + esc(title) + "</code>."], ""));
+      }
+
+      // -- 5. bookmarks --------------------------------------------------
+      var n = outline ? outline.length : 0;
+      if (pages >= 10 && !n) {
+        out.push(card("warn", "Bookmarks", ["This " + pages + "-page document has no bookmarks."],
+          "PDF/UA does not require bookmarks, but for a long document they are the practical way " +
+          "a person navigates without scrolling through every page."));
+      } else if (n) {
+        out.push(card("ok", "Bookmarks", [n + " top-level bookmark" + (n === 1 ? "" : "s") + "."], ""));
+      } else {
+        out.push(card("ok", "Bookmarks",
+          ["No bookmarks, which is normal for a document this short."], ""));
+      }
+
+      return out.join("");
+    });
+  }
+
+  function textStats(pdf, pages) {
+    var chars = 0, empty = 0, i = 0, chain = Promise.resolve();
+    for (i = 1; i <= pages; i++) {
+      chain = chain.then(pageCounter(pdf, i));
+    }
+    function pageCounter(doc, n) {
+      return function () {
+        return doc.getPage(n).then(function (p) { return p.getTextContent(); })
+          .then(function (tc) {
+            var c = 0, k;
+            for (k = 0; k < tc.items.length; k++) {
+              c += (tc.items[k].str || "").replace(/\s/g, "").length;
+            }
+            chars += c;
+            if (c === 0) { empty++; }
+            if (n % 25 === 0) { status.textContent = "Reading page " + n + " of " + pages + "…"; }
+          })
+          .catch(function () { empty++; });
+      };
+    }
+    return chain.then(function () { return { chars: chars, emptyPages: empty }; });
+  }
+
+  drop.addEventListener("click", function () { input.click(); });
+  drop.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); input.click(); }
+  });
+  input.addEventListener("change", function () { run(input.files && input.files[0]); });
+  ["dragenter", "dragover"].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("over"); });
+  });
+  ["dragleave", "drop"].forEach(function (ev) {
+    drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("over"); });
+  });
+  drop.addEventListener("drop", function (e) {
+    run(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]);
+  });
+})();
+</script>
+
+</body>
+</html>
