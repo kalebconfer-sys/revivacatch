@@ -7,3 +7,6 @@
 # knowledge-graph output, not site content
 graphify-out/
 .claude/graphify-out/
+
+# local test fixtures, never shipped
+_tmp/

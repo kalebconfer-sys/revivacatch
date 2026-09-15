@@ -7,7 +7,7 @@
 <meta name="description" content="Drop a PDF in and find out in seconds whether it has a text layer, whether it is tagged, what produced it, and whether it has a title. Runs entirely in your browser. Your file is never uploaded.">
 <link rel="canonical" href="https://revivacatch.com/pdf-check/">
 <meta property="og:title" content="Free PDF accessibility pre-check">
-<meta property="og:description" content="Five checks that decide whether a PDF can be remediated at all. Runs in your browser; the file is never uploaded.">
+<meta property="og:description" content="Seven checks that decide whether a PDF can be remediated at all. Runs in your browser; the file is never uploaded.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://revivacatch.com/pdf-check/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,7 +85,7 @@ footer p{margin-bottom:8px}
   <div class="wrap">
     <p class="kicker">Free, no sign-up</p>
     <h1>PDF accessibility pre-check</h1>
-    <p class="standfirst">Five checks that decide whether a PDF can be made accessible at all, and
+    <p class="standfirst">Seven checks that decide whether a PDF can be made accessible at all, and
     roughly how much work it will be. It runs inside your browser using Mozilla's pdf.js. Your file
     is never uploaded, never stored, and never seen by me.</p>
   </div>
@@ -108,7 +108,7 @@ footer p{margin-bottom:8px}
   <div class="limits">
     <h2>What this does not check</h2>
     <p>This is a pre-check, not a conformance test, and the gap between the two is large. It reads
-    five structural facts that are cheap to read and that decide whether remediation is even
+    seven structural facts that are cheap to read and that decide whether remediation is even
     possible. It does not evaluate:</p>
     <ul>
       <li>whether alternative text is <em>correct</em>, only whether images exist</li>
@@ -195,6 +195,7 @@ footer p{margin-bottom:8px}
   var COPIER = /(kmbt|skm_|bizhub|ricoh|konica|canon ir|ir-adv|workcentre|xerox|mfp|scanner|epson|papercut|toshiba e-studio)/i;
   var GOOD = /(acrobat pdfmaker|microsoft.{0,3} word|microsoft.{0,3} powerpoint|microsoft.{0,3} excel|libreoffice|indesign|pages|google docs)/i;
   // A title that just repeats a filename tells a screen reader nothing useful.
+  var FORMTOOL = /(livecycle|designer \d|adobe designer|xfa)/i;
   var JUNK_TITLE = /(^microsoft word -|^microsoft powerpoint -|\.(docx?|pptx?|xlsx?|indd|pdf)$|^skm_|^kmbt|^untitled$|^document\d*$|^\s*$)/i;
 
   function esc(s) {
@@ -315,6 +316,12 @@ footer p{margin-bottom:8px}
           "reading order before the PDF is written. Re-exporting the source document with Save As " +
           "is free and gets you further than hours of manual tagging. " +
           '<a href="/why-pdfs-come-back-rejected/#printed-not-saved">More on this</a>.'));
+      } else if (FORMTOOL.test(both)) {
+        out.push(card("warn", "What produced the file", shown,
+          "That is Adobe LiveCycle Designer, which a large share of government fillable forms are " +
+          "built in. It can carry real structure into a PDF, so this is not bad news by itself. It " +
+          "also writes an XFA form layer, and that is the part that usually decides whether the " +
+          "file can be made conformant at all. See the next check."));
       } else if (GOOD.test(both)) {
         out.push(card("ok", "What produced the file", shown,
           "That application can carry structure through into the PDF, so the source document is a " +
@@ -325,7 +332,38 @@ footer p{margin-bottom:8px}
           "tagging results above and below are the ones that matter."));
       }
 
-      // -- 3. tags -------------------------------------------------------
+      // -- 3. form technology --------------------------------------------
+      // PDF/UA-1 prohibits dynamic XFA and permits static XFA. pdf.js reports
+      // isPureXfa when there is no ordinary page content behind the XFA layer,
+      // which is the case that cannot be tagged into conformance.
+      if (info.IsXFAPresent) {
+        if (pdf.isPureXfa) {
+          out.push(card("bad", "Form technology",
+            ["This is an XFA form with no ordinary PDF page content underneath it."],
+            "XFA is Adobe's older XML form format, and this has two expensive consequences. It " +
+            "does not render reliably in the PDF viewers built into Chrome, Edge and Firefox, so " +
+            "a lot of people cannot open this file at all, phones included. And PDF/UA-1 " +
+            "prohibits dynamic XFA forms, so with no static page content to fall back on there is " +
+            "nothing here that tagging can bring into conformance. The route forward is to rebuild " +
+            "it as a standard PDF form, or to replace it with an accessible web form. XFA is " +
+            "deprecated in PDF 2.0 and is not something to build anything new on."));
+        } else {
+          out.push(card("warn", "Form technology",
+            ["This form carries an XFA layer alongside ordinary PDF page content, a hybrid form."],
+            "It opens in normal viewers, which a pure XFA file does not, and PDF/UA-1 does permit " +
+            "static XFA. Two cautions. The XFA layer and the PDF layer are two copies of the same " +
+            "form, so a change made to one is not made to the other and they drift apart. And XFA " +
+            "is deprecated in PDF 2.0, so a rebuild as a standard PDF form is the durable fix."));
+        }
+      } else if (info.IsAcroFormPresent) {
+        out.push(card("ok", "Form technology",
+          ["A standard PDF form, with no XFA layer."],
+          "That is the form technology PDF/UA-1 is written around and it opens everywhere. " +
+          "Whether each field carries a label a screen reader can announce is a separate question, " +
+          "and this check does not answer it."));
+      }
+
+      // -- 4. tags -------------------------------------------------------
       if (mark === undefined) {
         out.push(card("warn", "Accessibility tags",
           ["Tag information could not be read from this file."], ""));
@@ -336,10 +374,15 @@ footer p{margin-bottom:8px}
       } else {
         out.push(card("bad", "Accessibility tags", ["No tag structure is present."],
           "Assistive technology has nothing to navigate by: no headings, no lists, no table " +
-          "structure, no defined reading order. This is the main body of remediation work."));
+          "structure, no defined reading order. This is the main body of remediation work." +
+          (info.IsSignaturesPresent
+            ? " This file also carries a digital signature. Some e-signature services rewrite the " +
+              "PDF as they process it and discard the structure tree on the way through, so if " +
+              "this document was tagged before it was signed, the signing step is where to look."
+            : "")));
       }
 
-      // -- 4. title ------------------------------------------------------
+      // -- 5. title ------------------------------------------------------
       var title = (info.Title || "").trim();
       if (!title) {
         out.push(card("bad", "Document title", ["No title is set."],
@@ -354,7 +397,7 @@ footer p{margin-bottom:8px}
         out.push(card("ok", "Document title", ["The title is <code>" + esc(title) + "</code>."], ""));
       }
 
-      // -- 5. bookmarks --------------------------------------------------
+      // -- 6. bookmarks --------------------------------------------------
       var n = outline ? outline.length : 0;
       if (pages >= 10 && !n) {
         out.push(card("warn", "Bookmarks", ["This " + pages + "-page document has no bookmarks."],
@@ -365,6 +408,24 @@ footer p{margin-bottom:8px}
       } else {
         out.push(card("ok", "Bookmarks",
           ["No bookmarks, which is normal for a document this short."], ""));
+      }
+
+      // -- 7. document language ------------------------------------------
+      var lang = (info.Language || "").trim();
+      if (lang) {
+        out.push(card("ok", "Document language",
+          ["The language is set to <code>" + esc(lang) + "</code>."],
+          "A screen reader uses this to choose how to pronounce the words. One sanity check is " +
+          "worth doing by eye: if this document is in Spanish and that says en-US, it will be read " +
+          "aloud in an English voice and is close to unintelligible. That is the most common " +
+          "defect in translated documents, because translation tools copy the original's language " +
+          "setting through into the translated file."));
+      } else {
+        out.push(card("bad", "Document language", ["No document language is set."],
+          "PDF/UA-1 requires one, so this on its own fails validation. Without it a screen reader " +
+          "falls back to whatever voice the reader happens to have set, and mispronounces the " +
+          "entire document when that guess is wrong. It is among the cheapest defects to fix and " +
+          "among the most common."));
       }
 
       return out.join("");
