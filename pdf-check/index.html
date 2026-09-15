@@ -58,6 +58,15 @@ main{padding:20px 0 10px}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:var(--cream);padding:1px 6px;border-radius:5px;color:var(--ink);overflow-wrap:anywhere}
 .limits{border:1px dashed var(--line);border-radius:14px;padding:20px 24px;margin:30px 0;background:var(--cream)}
 .limits li{margin:0 0 8px 18px;font-size:1rem}
+.next{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:34px 0 10px}
+.next .opt{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff}
+.next .opt h3{font-size:1.12rem;margin:0 0 6px}
+.next .opt .price{font-size:.9rem;color:var(--teal);font-weight:600;margin:0 0 10px}
+.next .opt p{font-size:.97rem;margin:0 0 12px}
+.next .opt a.go{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;
+  font-weight:600;font-size:.95rem;padding:9px 16px;border-radius:9px}
+.next .opt a.go.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+@media(max-width:700px){.next{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line);margin-top:42px;padding:26px 0 40px;font-size:.92rem}
 footer p{margin-bottom:8px}
 .hidden{display:none}
@@ -120,6 +129,34 @@ footer p{margin-bottom:8px}
   and tell you what it says, at no charge. If the answer is that your document is fine, I will say
   that. <a href="/proofs/">Nine documents I have measured and remediated are published here</a>,
   before and after.</p>
+
+  <h2 style="margin-top:38px">If you want it fixed rather than explained</h2>
+  <p>Two ways, because the two kinds of organisation that need this buy in completely different
+  ways. Either one gets you the same thing back: the repaired file, and the veraPDF report showing
+  what it scored before and after.</p>
+
+  <div class="next">
+    <div class="opt">
+      <h3>Order it, from $65</h3>
+      <p class="price">Card payment, held in escrow until you accept the file</p>
+      <p>No purchase order, no vendor onboarding, no W-9, no contract to negotiate. For design
+      studios, agencies, nonprofits and small offices that need a file back in days. The turnaround
+      and page counts are on the listing.</p>
+      <a class="go" href="https://www.fiverr.com/kalcon5/make-your-pdf-accessible-for-section-508-wcag-and-ada-compliance" rel="noopener">Open the listing</a>
+    </div>
+    <div class="opt">
+      <h3>Email me instead</h3>
+      <p class="price">For volume, or for a public agency buying on a purchase order</p>
+      <p>Send one file first and I will remediate it and return the validator report at no charge,
+      so you are judging the work rather than a description of it. Pricing is by page count and is
+      quoted before anything starts.</p>
+      <a class="go alt" href="mailto:kaleb@revivacatch.com?subject=One%20file%20to%20remediate">kaleb@revivacatch.com</a>
+    </div>
+  </div>
+
+  <p class="privacy" style="margin-top:6px">RevivaCatch is one person, not an agency. There is no
+  certification behind this and no assistive-technology testing is claimed. What is claimed is the
+  validator score, which you can re-run yourself on the file you get back.</p>
 
 </div>
 </main>
