@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pennsylvania public documents, measured</title><meta name="description" content="Twelve published Pennsylvania public documents measured against PDF/UA-1 with veraPDF, before and after remediation.">
+<title>Pennsylvania public documents, measured</title><meta name="description" content="Thirteen published Pennsylvania public documents measured against PDF/UA-1 with veraPDF, before and after remediation, including the Commonwealth's own Digital Accessibility Policy.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -51,18 +51,23 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 
 <div class="hero"><div class="wrap"><span class="sub">Proof of work &middot; Pennsylvania public documents</span>
 <h1 style="margin-top:8px">The form a nurse with a disability uses to request a testing accommodation failed nine accessibility rules. It now fails none.</h1>
-<p style="margin-top:14px;max-width:66ch">Twelve documents published by the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired, measured again, and compared against the original page by page - by raster where the fix was structural, and word by word where a font had to be embedded. Five now pass with zero failed rules, including the Board&rsquo;s own Request Form for Testing Accommodations. The other seven are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
+<p style="margin-top:14px;max-width:66ch">Thirteen documents published by the Pennsylvania Office of Administration, the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired, measured again, and compared against the original page by page - by raster where the fix was structural, and word by word where a font had to be embedded. Six now pass with zero failed rules, including the Board&rsquo;s own Request Form for Testing Accommodations and the Commonwealth&rsquo;s own Digital Accessibility Policy. The other seven are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
 <div class="band">
-  <div><div class="l">Documents measured</div><div class="n">12</div><div class="s">58 pages, three Pennsylvania issuers</div></div>
-  <div><div class="l">Failed rules before</div><div class="n fail">71</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
-  <div><div class="l">Failed rules after</div><div class="n pass">30</div><div class="s">Five files at zero, fully conforming</div></div>
+  <div><div class="l">Documents measured</div><div class="n">13</div><div class="s">62 pages, four Pennsylvania issuers</div></div>
+  <div><div class="l">Failed rules before</div><div class="n fail">77</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
+  <div><div class="l">Failed rules after</div><div class="n pass">30</div><div class="s">Six files at zero, fully conforming</div></div>
 </div>
 </div></div>
 
 <section><div class="wrap">
-<h2>Five files conform</h2>
-<p style="max-width:66ch">These five carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
+<h2>Six files conform</h2>
+<p style="max-width:66ch">These six carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
 <div class="docs" style="margin-top:18px">
+<div class="doc win"><div class="k">Pennsylvania Office of Administration</div><h3>Digital Accessibility Policy (effective November 12, 2025)</h3>
+<div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 6 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>4/4</b> pixel-identical</span></div>
+<p style="font-size:.93rem">This is the policy that sets WCAG 2.1 Level AA as the standard for every Commonwealth agency, and it was six rules short of PDF/UA-1 itself. In fairness it was the closest file on this page: tagged, marked, titled, declared as English, with real alternative text already written for the Office&rsquo;s logo. Somebody did that work. What remained was small &mdash; six links with no accessible name, one horizontal rule four points wide tagged as a picture, four empty spaces left unmarked, and one font carrying a stale character set. Nothing about what the document says changed, and all four pages render identically.</p>
+<p style="margin-top:10px"><a class="dl" href="pa-oa-digital-accessibility-policy-ua.pdf">Conforming PDF</a></p></div>
+
 <div class="doc win"><div class="k">Pennsylvania State Board of Nursing</div><h3>Request Form for Testing Accommodations (rev 06/2025)</h3>
 <div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 9 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Text <b>397/397</b> words unmoved</span></div>
 <p style="font-size:.93rem">Fourteen horizontal rules were tagged as figures, so a screen reader stopped at each one expecting a description. They are decoration, so they are now artifacts. Two headings skipped levels. Five fonts were named but not carried, which is why it is the one file here whose pages are not pixel-identical &mdash; see the note below.</p>
@@ -96,6 +101,8 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 <div class="scroll"><table>
 <thead><tr><th>Document</th><th class="num">Pages</th><th class="num">Before</th><th class="num">After</th><th>What is still failing, and why</th></tr></thead>
 <tbody>
+<tr><td colspan="5" class="issuer" style="background:var(--cream)">Pennsylvania Office of Administration</td></tr>
+<tr><td>Digital Accessibility Policy (eff. 11/12/2025)</td><td class="num">4</td><td class="num">6</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Nothing. Conforming, signed off.</td></tr>
 <tr><td colspan="5" class="issuer" style="background:var(--cream)">Pennsylvania Department of Health &mdash; school health forms</td></tr>
 <tr><td>Parent / Guardian Scoliosis Notification</td><td class="num">1</td><td class="num">2</td><td class="num"><b style="color:var(--teal)">0</b></td><td>Nothing. Conforming, signed off.</td></tr>
 <tr><td>Certificate of Immunizations</td><td class="num">1</td><td class="num">2</td><td class="num">2</td><td>Two rows of the vaccine grid span a different number of columns than the rest, because the serology boxes are merged cells with no span declared. Which cell was merged is readable off the page by eye and not off the file, so it stays a human decision.</td></tr>
@@ -113,7 +120,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 <tr><td>Communicable Disease Referral</td><td class="num">1</td><td class="num">8</td><td class="num">6</td><td>52 unnamed form fields, 64 untagged content items, one link with no description.</td></tr>
 </tbody></table></div>
 <div class="note"><b>What is left is not a queue of easy wins.</b> Four of the seven fail on table structure or on a scan. The other three are interactive forms whose fields carry no accessible name, so a screen reader announces the field but not what it asks for; naming those means reading each label off the page and deciding which field it belongs to. Deciding that a row&rsquo;s last cell was merged across two columns, or re-typing a scan, changes what the document says. A script that decides those things produces a file that passes a validator and misreads to the person using a screen reader, which is worse than the honest failure. Those stay on this list until a person does them.</div>
-<div class="note"><b>Every &ldquo;after&rdquo; count above still includes one rule that is failing on purpose.</b> Clause 5 is the PDF/UA conformance identifier. This pipeline refuses to write it. A file gets that identifier only after a validator has independently passed everything else, which is why ten of these twelve are published as failing rather than stamped and called done.</div>
+<div class="note"><b>Every &ldquo;after&rdquo; count above still includes one rule that is failing on purpose.</b> Clause 5 is the PDF/UA conformance identifier. This pipeline refuses to write it. A file gets that identifier only after a validator has independently passed everything else, which is why seven of these thirteen are published as failing rather than stamped and called done.</div>
 </div></section>
 
 <section><div class="wrap"><h2>How to read these</h2>
