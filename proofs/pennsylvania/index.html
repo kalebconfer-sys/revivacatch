@@ -51,18 +51,23 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;background:var(-
 
 <div class="hero"><div class="wrap"><span class="sub">Proof of work &middot; Pennsylvania public documents</span>
 <h1 style="margin-top:8px">The form a nurse with a disability uses to request a testing accommodation failed nine accessibility rules. It now fails none.</h1>
-<p style="margin-top:14px;max-width:66ch">Thirteen documents published by the Pennsylvania Office of Administration, the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired, measured again, and compared against the original page by page - by raster where the fix was structural, and word by word where a font had to be embedded. Six now pass with zero failed rules, including the Board&rsquo;s own Request Form for Testing Accommodations and the Commonwealth&rsquo;s own Digital Accessibility Policy. The other seven are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
+<p style="margin-top:14px;max-width:66ch">Fourteen documents published by the Pennsylvania Office of Administration, the Pennsylvania Department of Health, the Pennsylvania State Board of Nursing, and the Erie County Department of Health, downloaded from the agencies' own pages and measured with veraPDF against PDF/UA-1 (ISO 14289-1). Each was repaired, measured again, and compared against the original page by page - by raster where the fix was structural, and word by word where a font had to be embedded. Seven now pass with zero failed rules, including the Board&rsquo;s own Request Form for Testing Accommodations, the Commonwealth&rsquo;s own Digital Accessibility Policy, and the Board&rsquo;s own meeting agenda from September 11, 2026. The other seven are published here with exactly what remains and why, because that gap is the honest part of this work.</p>
 <div class="band">
-  <div><div class="l">Documents measured</div><div class="n">13</div><div class="s">62 pages, four Pennsylvania issuers</div></div>
-  <div><div class="l">Failed rules before</div><div class="n fail">77</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
-  <div><div class="l">Failed rules after</div><div class="n pass">30</div><div class="s">Six files at zero, fully conforming</div></div>
+  <div><div class="l">Documents measured</div><div class="n">14</div><div class="s">69 pages, four Pennsylvania issuers</div></div>
+  <div><div class="l">Failed rules before</div><div class="n fail">85</div><div class="s">veraPDF, PDF/UA-1 profile</div></div>
+  <div><div class="l">Failed rules after</div><div class="n pass">30</div><div class="s">Seven files at zero, fully conforming</div></div>
 </div>
 </div></div>
 
 <section><div class="wrap">
-<h2>Six files conform</h2>
-<p style="max-width:66ch">These six carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
+<h2>Seven files conform</h2>
+<p style="max-width:66ch">These seven carry the PDF/UA-1 identifier because veraPDF independently passed them first, 106 rules out of 106. The identifier is written by hand at sign-off, never by the tool, and never before the file has earned it.</p>
 <div class="docs" style="margin-top:18px">
+<div class="doc win"><div class="k">Pennsylvania State Board of Nursing</div><h3>Meeting Agenda, September 11, 2026</h3>
+<div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 8 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>7/7</b> pixel-identical</span></div>
+<p style="font-size:.93rem">The agenda the Board published four days before the meeting. Eight rules failed: no document title, a silent Department of State logo, a Teams link that announced no destination, and a roster table whose rows did not line up. But the finding that mattered is one no validator reports. The agenda had <b>fifty-five headings, and thirty-four of them were empty</b> &mdash; no text, no image, nothing. veraPDF passes a file with thirty-four blank headings; there is no rule against it. A nurse moving through the agenda by heading, which is the normal way to read an agenda, stopped thirty-four times at something that announced &ldquo;heading&rdquo; and then said nothing. They are a Word export artifact, so the same defect is in every document built from that template. Twenty more headings sit on address lines; those contain real text, so they were left exactly as published &mdash; whether a street address belongs in the outline is the Board&rsquo;s editorial call, not mine.</p>
+<p style="margin-top:10px"><a class="dl" href="pa-nursing-meeting-agenda-2026-09-11-ua.pdf">Conforming PDF</a></p></div>
+
 <div class="doc win"><div class="k">Pennsylvania Office of Administration</div><h3>Digital Accessibility Policy (effective November 12, 2025)</h3>
 <div class="row"><span>Before <b style="color:var(--red)">FAIL</b> 6 rules</span><span>After <b style="color:var(--teal)">PASS</b> 0 / 106</span><span>Rendering <b>4/4</b> pixel-identical</span></div>
 <p style="font-size:.93rem">This is the policy that sets WCAG 2.1 Level AA as the standard for every Commonwealth agency, and it was six rules short of PDF/UA-1 itself. In fairness it was the closest file on this page: tagged, marked, titled, declared as English, with real alternative text already written for the Office&rsquo;s logo. Somebody did that work. What remained was small &mdash; six links with no accessible name, one horizontal rule four points wide tagged as a picture, four empty spaces left unmarked, and one font carrying a stale character set. Nothing about what the document says changed, and all four pages render identically.</p>
